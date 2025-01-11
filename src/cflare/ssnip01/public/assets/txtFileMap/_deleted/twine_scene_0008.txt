@@ -1,0 +1,64 @@
+
+<tw-passagedata pid="<pid>" name="<pageName>" tags="" position="225,100" size="100,100">&lt;&lt;cacheaudio &quot;bgm_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/aa1a443d.mp3&quot;&gt;&gt;&lt;&lt;cacheaudio &quot;sfx_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/246cbccb.mp3&quot;&gt;&gt;
+&lt;html&gt;
+    &lt;img class=&quot;full-width-image&quot; src=&quot;https://twine.ackop.com/<storyId>_picture_p<pid>.png&quot;/&gt;
+    &lt;script&gt;
+        targetImageUrl = &quot;https://twine.ackop.com/<storyId>_picture_p<pid>.png&quot;; 
+        defaultImageUrl = &quot;https://joe.ackop.com/assets/img/generating.png&quot;; 
+        images = document.getElementsByTagName(&quot;img&quot;);
+        lastAttemptTime = 0;
+        for (let i = 0; i &lt; images.length; i++) {
+            images[i].addEventListener(&quot;error&quot;, function() {
+                const currentTime = Date.now();
+                if (currentTime - lastAttemptTime &gt;= 5000) {
+                    this.src = targetImageUrl + &quot;?v=&quot; + currentTime;
+                    lastAttemptTime = currentTime;
+                }
+            });
+        }
+    &lt;/script&gt;
+&lt;/html&gt;
+
+<sceneText>
+
+&lt;&lt;if passage() == &quot;7&quot;&gt;&gt;
+&lt;&lt;button [[Quiz -- &gt; | Q1]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt; 
+
+&lt;&lt;else&gt;&gt;
+&lt;&lt;button [[ Next -- &gt; |<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;button &quot;🔊&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.4 play&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🎵&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🗣️&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.5 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🔇&quot;&gt;&gt; &lt;&lt;masteraudio stop&gt;&gt; &lt;&lt;/button&gt;&gt;
+&lt;&lt;if passage() == &quot;2&quot;&gt;&gt;
+&lt;&lt;button &quot;◀️&quot;&gt;&gt;
+    &lt;&lt;script&gt;&gt;
+    window.location.href=&quot;https://joe.ackop.com/&quot;
+    &lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🏠&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;window.location.href=&quot;https://joe.ackop.com/&quot;&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button [[▶️|<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt; 
+
+&lt;&lt;else&gt;&gt;
+&lt;&lt;button [[◀️|<prevPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🏠&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;window.location.href=&quot;https://joe.ackop.com/&quot;&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button [[▶️|<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt; 
+&lt;&lt;/if&gt;&gt;
+
+</tw-passagedata>

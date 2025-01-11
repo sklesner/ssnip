@@ -1,0 +1,37 @@
+            <div class="box">
+                <img src="<imageUrl>" alt="Image <pageNum>">
+                <div class="caption-container">
+                    <input type="text" id="img_<storyId>_<pageNum>" value="<imageWords>">
+                    <button onclick="picture_update(1)">Update</button>
+                </div>
+            </div>
+            
+            <div class="box">
+                <div class="story-container">
+                    <input type="text" id="story_<storyId>_<pageNum>" value="<storyWords>">
+                    <button onclick="story_update(1)">Update</button>
+                </div>
+            </div>
+            
+            <div class="box">
+                <audio controls>
+                    <source src="<musicUrl>" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="caption-container">
+                    <input type="text" id="music_<storyId>_<pageNum>" value="<musicWords>">
+                    <button onclick="music_update(1)">Update</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <audio controls>
+                    <source src="<soundUrl>" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="caption-container">
+                    <input type="text" id="sound_<storyId>_<pageNum>" value="<soundWords>">
+                    <button onclick="sound_update(1)">Update</button>
+                </div>
+            </div>
+        </div>

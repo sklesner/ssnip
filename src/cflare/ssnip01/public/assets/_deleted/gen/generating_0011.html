@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Animated Emoji Display</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #emoji-container {
+            font-size: 80px;
+            text-align: center;
+            width: 800px; /* Adjust based on your needs */
+            height: 120px; /* Adjust based on your needs */
+        }
+        .emoji {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="emoji-container"></div>
+
+    <script>
+
+        function emojiArray(emojiString) {
+            return Array.from(emojiString);
+        }
+
+        const emojiString = '<emojiTxt>'
+        // const emojiString = '💩🦔🎢🎉🐥😅'
+
+        const emojis = emojiArray(emojiString);
+        // const emojis = ['💩', '🦔', '🎢', '🎉', '🐥', '😅'];
+        const container = document.getElementById('emoji-container');
+        let currentIndex = 0;
+
+        // Create emoji elements
+        emojis.forEach(emoji => {
+            const span = document.createElement('span');
+            span.textContent = emoji;
+            span.className = 'emoji';
+            container.appendChild(span);
+        });
+
+        const emojiElements = container.getElementsByClassName('emoji');
+
+        // function checkAndRedirect() {
+        //     // const emojiString = '<emojiTxt>'
+        //     const emojiString = '💩🦔🎢🎉🐥😅';
+        //     const url = 'https://twine.ackop.com/' + emojiString + '.html';
+
+        //     fetch(url, { 
+        //         method: 'GET',
+        //         mode: 'no-cors'
+        //     })
+        //     .then(response => {
+        //         if (response.type === 'opaque') {
+        //             console.log('Resource exists, but content is not accessible due to CORS.');
+        //             // You can perform actions here knowing the resource exists
+        //         } else {
+        //             console.log('Unexpected response type:', response.type);
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error occurred, resource might not exist:', error);
+        //     });
+        // }
+
+        function checkAndRedirect() {
+            const emojiString = '<emojiTxt>'
+            // const emojiString = '💩🦔🎢🎉🐥😅'
+            const url = 'https://twine.ackop.com/' + emojiString + '.html'
+            // Use fetch to check if the URL is accessible
+            fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                            window.location.href = url;
+                            console.error('Destination URL is accessible');
+                    } else {
+                        console.error('Destination URL is not accessible');
+                        // Handle the error (e.g., show a message to the user)
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking destination URL:', error);
+                    // Handle the error (e.g., show a message to the user)
+                });
+        }
+
+        // Add code to save starting time
+        var startTime = Date.now();
+
+        function updateEmoji() {
+            if (currentIndex <= emojis.length) {
+                for (let i = 0; i < currentIndex; i++) {
+                    emojiElements[i].style.opacity = '1';
+                }
+                currentIndex++;
+            } else {
+                for (let i = 0; i < emojiElements.length; i++) {
+                    emojiElements[i].style.opacity = '0';
+                }
+                currentIndex = 0;
+            }
+
+            // Add code to compare current time to starting time and call bob() if 5 seconds have passed
+            const currentTime = Date.now();
+            if (currentTime - startTime >= 5000) {
+                checkAndRedirect();
+                startTime = currentTime; 
+            }
+            setTimeout(updateEmoji, 500);
+        }
+
+        updateEmoji();
+
+    </script>
+</body>
+</html>

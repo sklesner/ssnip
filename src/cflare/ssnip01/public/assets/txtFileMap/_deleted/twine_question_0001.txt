@@ -1,0 +1,52 @@
+
+<tw-passagedata pid="<pid>" name="<pageName>" tags="" position="225,100" size="100,100">
+&lt;&lt;if $firstQuestion&gt;&gt;
+    Welcome to the Quiz
+&lt;&lt;elseif $retry&gt;&gt;
+Try again! So far $correctCount ✔️ and $incorrectCount ❌
+&lt;&lt;else&gt;&gt;
+Good answer! So far $correctCount ✔️ and $incorrectCount ❌
+&lt;&lt;/if&gt;&gt;
+&lt;html&gt;
+    &lt;img class=&quot;full-width-image&quot; src=&quot;https://twine.ackop.com/<storyId>_picture_p<picId>.png&quot;/&gt;
+    &lt;script&gt;
+        targetImageUrl = &quot;https://twine.ackop.com/<storyId>_picture_p<picId>.png&quot;; 
+        defaultImageUrl = &quot;https://joe.ackop.com/assets/img/generating.png&quot;; 
+        lastAttemptTime = 0;
+        images = document.getElementsByTagName(&quot;img&quot;);
+        for (let i = 0; i &lt; images.length; i++) {
+            images[i].addEventListener(&quot;error&quot;, function() {
+                const currentTime = Date.now();
+                if (currentTime - lastAttemptTime &gt;= 5000) {
+                    this.src = targetImageUrl + &quot;?v=&quot; + currentTime;
+                    lastAttemptTime = currentTime;
+                }
+            });
+        }
+    &lt;/script&gt;
+&lt;/html&gt;<questionText>
+
+&lt;&lt;button &quot;<b1Text>&quot; &gt;&gt;
+<b1Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b2Text>&quot; &gt;&gt;
+<b2Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b3Text>&quot; &gt;&gt;
+<b3Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b4Text>&quot; &gt;&gt;
+<b4Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;html&gt;  
+    &lt;a href=&quot;http://aipif-2023.s3.amazonaws.com/story/story_fc6b37f5/p0090-sgallery.html&quot; target=&quot;_blank&quot;&gt;sounds&lt;/a&gt;
+    &lt;a href=&quot;http://www.ufafu.com&quot;&gt;home&lt;/a&gt;
+&lt;/html&gt;
+
+</tw-passagedata>
+            
+            

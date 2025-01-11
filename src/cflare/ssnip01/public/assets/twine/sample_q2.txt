@@ -1,0 +1,19 @@
+<question>
+What life lesson does this story teach?
+</question>
+
+<answer>
+This story teaches that to become the person you want to be, you must develop habits and take actions that align with that desired identity every day.
+</answer>
+
+<decoy>
+This story teaches that friendship is the most valuable thing in life, and we should always prioritize spending time with our friends.
+</decoy>
+
+<decoy>
+This story teaches that success comes from taking risks and being bold in your decisions, even if it means facing failure.
+</decoy>
+
+<decoy>
+This story teaches that playing games can help develop problem-solving skills and should be a central part of one's daily routine.
+</decoy>

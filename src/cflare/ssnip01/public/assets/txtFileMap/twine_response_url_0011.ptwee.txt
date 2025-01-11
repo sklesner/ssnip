@@ -1,0 +1,143 @@
+<tw-passagedata pid="{pid}" name="{pageName}" tags="" position="225,100" size="100,100">&lt;style&gt;
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+    }
+    .page-container {
+        max-width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    h1 {
+        font-size: 18px;
+        word-wrap: break-word;
+    }
+    .rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .rating &gt; span {
+        width: 120px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+    .stars {
+        display: inline-block;
+        direction: rtl;
+    }
+    .stars input[type=&quot;radio&quot;] {
+        display: none;
+    }
+    .stars label {
+        font-size: 25px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .stars label:hover,
+    .stars label:hover ~ label,
+    .stars input[type=&quot;radio&quot;]:checked ~ label {
+        color: #ffcc00;
+    }
+    .submit-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .submit-container input {
+        background-color: #ffcc00;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    textarea {
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+    }
+&lt;/style&gt;
+
+&lt;div class=&quot;page-container&quot;&gt;
+    {messageText}
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h1&gt;Rate the story: (1 Star = Very Dissatisfied; 2 Stars = Dissatisfied; 3 Stars = Neither Satisfied nor Dissatisfied; 4 Stars = Satisfied; 5 Stars = Very Satisfied)&lt;/h1&gt;
+        &lt;form id=&quot;feedbackForm&quot;&gt;
+            &lt;div id=&quot;ratingQuestions&quot;&gt;&lt;/div&gt;
+            &lt;div&gt;
+                &lt;label for=&quot;comments&quot;&gt;Anything else to add?&lt;/label&gt;&lt;br&gt;
+                &lt;textarea name=&quot;comments&quot; id=&quot;comments&quot; placeholder=&quot;Write your feedback here...&quot;&gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;submit-container&quot;&gt;
+                &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+            &lt;/div&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;Thank you for your feedback!&lt;/p&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;text-align: center;&quot;&gt;
+        &lt;&lt;button &quot;{bText}&quot;&gt;&gt;
+            &lt;&lt;script&gt;&gt;
+            window.location.href=&quot;{bAction}&quot;
+            &lt;&lt;/script&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    const questions = [
+        { id: &apos;story&apos;, label: &apos;Story&apos; },
+        { id: &apos;picture&apos;, label: &apos;Pictures&apos; },
+        { id: &apos;narration&apos;, label: &apos;Narration&apos; },
+        { id: &apos;music&apos;, label: &apos;Music&apos; }
+    ];
+
+    function createRatingQuestion(question, index) {
+        const div = document.createElement(&apos;div&apos;);
+        div.className = &apos;rating&apos;;
+        div.innerHTML = `
+            &lt;span id=&quot;${question.id}-label&quot;&gt;${question.label}&lt;/span&gt;
+            &lt;div class=&quot;stars&quot;&gt;
+                ${[5, 4, 3, 2, 1].map(value =&gt; `
+                    &lt;input type=&quot;radio&quot; id=&quot;star${value}-${index}&quot; name=&quot;${question.id}&quot; value=&quot;${value}&quot; aria-labelledby=&quot;${question.id}-label&quot;&gt;&lt;/input&gt;
+                    &lt;label for=&quot;star${value}-${index}&quot;&gt;&amp;#9733;&lt;/label&gt;
+                `).join(&apos;&apos;)}
+            &lt;/div&gt;
+        `;
+        return div;
+    }
+
+    const ratingQuestionsContainer = document.getElementById(&apos;ratingQuestions&apos;);
+    questions.forEach((question, index) =&gt; {
+        ratingQuestionsContainer.appendChild(createRatingQuestion(question, index));
+    });
+
+    document.getElementById(&apos;feedbackForm&apos;).addEventListener(&apos;submit&apos;, function(e) {
+        e.preventDefault(); // Prevent the form from submitting
+
+        const feedback = {};
+
+        // Get ratings for all questions
+        questions.forEach(question =&gt; {
+            const rating = document.querySelector(`input[name=&quot;${question.id}&quot;]:checked`);
+            feedback[question.id] = rating ? +rating.value : 0;
+        });
+
+        // Get the comments
+        feedback.comments = document.getElementById(&apos;comments&apos;).value;
+
+        // Convert feedback object to JSON
+        const jsonFeedback = JSON.stringify(feedback, null, 2);
+
+        // Log the JSON
+        console.log(jsonFeedback);
+    });
+&lt;/script&gt;</tw-passagedata>

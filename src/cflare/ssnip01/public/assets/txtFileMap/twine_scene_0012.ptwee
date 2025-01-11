@@ -1,0 +1,125 @@
+<<cacheaudio "bgm_r" "mp3|http://aipif-2023.s3.amazonaws.com/_asset/aa1a443d.mp3">><<cacheaudio "sfx_r" "mp3|http://aipif-2023.s3.amazonaws.com/_asset/246cbccb.mp3">><html>
+ <head>
+  <style>
+   .emoji { font-size: 35vw; line-height: 1; cursor: pointer; user-select: none; display: flex; justify-content: center; align-items: center; }
+   .full-width-image { max-width: 100%; height: auto; cursor: pointer; }
+   .container{pid} { display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
+   .centered-buttons {text-align: center;}
+  </style>
+ </head><body><div id="container{pid}"><span class="emoji" onclick="toggleContent()">{emoji}</span>
+  </div>
+  <script>
+   container{pid} = document.getElementById("container{pid}");
+   emoji{pid} = "{emoji}";
+   targetImageUrl = "https://twine.ackop.com/{storyId}_picture_p{pid}.png";
+   defaultImageUrl = "https://joe.ackop.com/assets/img/generating.png";
+   isEmoji = true;
+   lastAttemptTime = 0;
+   targetImageUrl2="";
+
+   function toggleContent() {
+     if (isEmoji) {
+       checkImageAvailability(function(available) {
+         if (available) {
+           displayImage();
+         } else {
+           console.log("Image is not available yet.");
+         }
+       });
+     } else {
+       displayEmoji();
+     }
+   }
+   
+   function checkImageAvailability(callback) {
+     const img = new Image();
+     img.onload = function() {
+       isImageAvailable = true;
+       callback(true);
+     };
+     img.onerror = function() {
+        isImageAvailable = false;
+        const currentTime = Date.now();
+        if (currentTime - lastAttemptTime >= 5000) {
+          this.src = targetImageUrl + "?v=" + currentTime;
+          targetImageUrl2 = this.src;
+          lastAttemptTime = currentTime;
+        }
+        callback(false);
+     };
+     img.src = targetImageUrl2 == "" ? targetImageUrl : targetImageUrl2;
+   }
+
+   function displayImage() {
+     const img = document.createElement("img");
+     img.src = targetImageUrl2 == "" ? targetImageUrl : targetImageUrl2;
+     img.className = "full-width-image";
+     img.onclick = toggleContent;
+     img.onerror = handleImageError;
+     container{pid}.innerHTML = "";
+     container{pid}.appendChild(img);
+     isEmoji = false;
+   }
+
+   function displayEmoji() {
+     container{pid}.innerHTML = `<span class="emoji" onclick="toggleContent()">${emoji{pid}}</span>`;
+     isEmoji = true;
+   }
+
+   function handleImageError() {
+     const currentTime = Date.now();
+     if (currentTime - lastAttemptTime >= 5000) {
+       this.src = targetImageUrl + "?v=" + currentTime;
+       targetImageUrl2 = this.src;
+       lastAttemptTime = currentTime;
+     }
+   }
+  </script>
+ </body>
+</html>
+
+{sceneText}
+
+<div class="centered-buttons">
+<<if passage() == "7">>
+<<button [[Quiz -- > | Q1]]>>
+<<audio "bgm_r" stop>>
+<</button>> 
+
+<<else>>
+<<button [[ Next -- > |{nextPageName}]]>>
+<<audio "bgm_r" stop>>
+<</button>>
+<</if>>
+
+<<button "🔊">>
+<<audio "sfx_r" volume 0.4 play>>
+<<audio "bgm_r" loop volume 0.02 play>>
+<</button>><<button "🎵">>
+<<audio "bgm_r" loop volume 0.02 play>>
+<</button>><<button "🗣️">>
+<<audio "sfx_r" volume 0.5 play>>
+<</button>><<button "🔇">> <<masteraudio stop>><</button>>
+
+<<if passage() == "2">>
+<<button "◀️">>
+    <<script>>
+    window.location.href="https://joe.ackop.com/"
+    <</script>>
+<</button>><<button "🏠">>
+<<script>>window.location.href="https://joe.ackop.com/"<</script>>
+<</button>><<button [[▶️|{nextPageName}]]>>
+<<audio "bgm_r" stop>>
+<</button>> 
+
+<<else>>
+<<button [[◀️|{prevPageName}]]>>
+<<audio "bgm_r" stop>>
+<</button>><<button "🏠">>
+<<script>>window.location.href="https://joe.ackop.com/"<</script>>
+<</button>><<button [[▶️|{nextPageName}]]>>
+<<audio "bgm_r" stop>>
+<</button>> 
+<</if>>
+</div>
+

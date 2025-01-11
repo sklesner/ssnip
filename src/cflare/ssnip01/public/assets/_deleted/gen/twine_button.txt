@@ -1,0 +1,3 @@
+&lt;&lt;button [[<buttonText>|<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;

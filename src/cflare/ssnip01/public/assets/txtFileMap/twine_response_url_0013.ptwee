@@ -1,0 +1,157 @@
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .page-container {
+            max-width: 100%;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .passage {
+            line-height: 1.1;
+        }
+        .container {
+            width: 100%;
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 1em;
+            word-wrap: break-word;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .rating > span {
+            width: 160px;
+            margin-right: 10px;
+        }
+        .stars {
+            display: inline-block;
+            direction: rtl;
+            padding-left: 1em;
+        }
+        .stars input[type="radio"] {
+            display: none;
+        }
+        .stars label {
+            font-size: 1em;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input[type="radio"]:checked ~ label {
+            color: #ffcc00;
+        }
+        textarea {
+            width: 60%;
+            height: 100px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            border-radius: 4px;
+            min-width: 0em;
+        }
+        .submit-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-container input {
+            background-color: #4a4a4a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-container input:hover {
+            background-color: #5a5a5a;
+        }
+        .thank-you {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #aaa;
+        }
+        .another-story {
+            display: block;
+            width: 200px;
+            margin: 20px auto 0;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .another-story:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <div class="page-container"><!--
+            -->{messageText}<!--
+            --><div class="container">
+            <h1>Did you like it?</h1>
+            <form id="feedbackForm"><div id="ratingQuestions"></div>
+                <textarea name="comments" id="comments" placeholder="Please explain why."></textarea> <!-- <p class="thank-you">Thank you for your feedback!</p> -->
+            </form> </div>
+        <!-- 
+           <a href="{bAction}" class="another-story">{bText}</a>
+           <div style="text-align: center;"><<button "{bText}">><<script>>window.location.href="{bAction}"<</script>><</button>></div>
+        -->
+        <div style="text-align: center;"><<button "DONE ▶️">><<script>>window.location.href="{bAction}"<</script>><</button>></div>
+    </div>
+    <script>
+        const qquestions = [
+            { id: 'quiz', label: 'Quiz' },
+            { id: 'story', label: 'Story' },
+            { id: 'pictures', label: 'Pictures' }
+        ];
+        function createRatingQuestion(question, index) {
+            const div = document.createElement('div');
+            div.className = 'rating';
+            div.innerHTML = `
+                <span id="${question.id}-label">${question.label}</span>
+                <div class="stars">
+                    ${[5, 4, 3, 2, 1].map(value => `
+                        <input type="radio" id="star${value}-${index}" name="${question.id}" value="${value}" aria-labelledby="${question.id}-label">
+                        <label for="star${value}-${index}">&#9733;</label>
+                    `).join('')}
+                </div>
+            `;
+            return div;
+        }
+        const ratingQuestionsContainer = document.getElementById('ratingQuestions');
+        qquestions.forEach((question, index) => {
+            ratingQuestionsContainer.appendChild(createRatingQuestion(question, index));
+        });
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const feedback = {};
+            qquestions.forEach(question => {
+                const rating = document.querySelector(`input[name="${question.id}"]:checked`);
+                feedback[question.id] = rating ? +rating.value : 0;
+            });
+            feedback.comments = document.getElementById('comments').value;
+            const jsonFeedback = JSON.stringify(feedback, null, 2);
+            console.log(jsonFeedback);
+        });
+    </script>

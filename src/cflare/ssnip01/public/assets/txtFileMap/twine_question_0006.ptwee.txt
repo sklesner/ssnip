@@ -1,0 +1,256 @@
+<tw-passagedata pid="{pid}" name="{pageName}" tags="" position="225,100" size="100,100">&lt;&lt;cacheaudio &quot;bgm_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/aa1a443d.mp3&quot;&gt;&gt;&lt;&lt;cacheaudio &quot;sfx_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/246cbccb.mp3&quot;&gt;&gt;&lt;&lt;if $firstQuestion&gt;&gt;
+Think carefully!
+
+&lt;&lt;elseif $retry&gt;&gt;Try again!
+Score: $correctCount ✔️ and $incorrectCount ❌
+
+&lt;&lt;else&gt;&gt;Good answer!
+Score: $correctCount ✔️ and $incorrectCount ❌
+
+&lt;&lt;/if&gt;&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;style&gt;
+   .emoji { font-size: 35vw; line-height: 1; cursor: pointer; user-select: none; display: flex; justify-content: center; align-items: center;}
+   .full-width-image { max-width: 100%; height: auto; cursor: pointer; }
+   .container{pid} { display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
+   .centered-buttons {text-align: center;}
+  &lt;/style&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;div id=&quot;container{pid}&quot;&gt;
+   &lt;span class=&quot;emoji&quot; onclick=&quot;toggleContent()&quot;&gt;{emoji}&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+   container{pid} = document.getElementById(&quot;container{pid}&quot;);
+   emoji{pid} = &quot;{emoji}&quot;;
+   targetImageUrl = &quot;https://twine.ackop.com/{storyId}_picture_p{picId}.png&quot;;
+   defaultImageUrl = &quot;https://joe.ackop.com/assets/img/generating.png&quot;;
+   isEmoji = true;
+   lastAttemptTime = 0;
+   targetImageUrl2 = &quot;&quot;;
+
+   function toggleContent() {
+     if (isEmoji) {
+       checkImageAvailability(function(available) {
+         if (available) {
+           displayImage();
+         } else {
+           console.log(&quot;Image is not available yet.&quot;);
+         }
+       });
+     } else {
+       displayEmoji();
+     }
+   }
+   
+   function checkImageAvailability(callback) {
+     const img = new Image();
+     img.onload = function() {
+       isImageAvailable = true;
+       callback(true);
+     };
+     img.onerror = function() {
+        isImageAvailable = false;
+        const currentTime = Date.now();
+        if (currentTime - lastAttemptTime &gt;= 5000) {
+          this.src = targetImageUrl + &quot;?v=&quot; + currentTime;
+          targetImageUrl2 = this.src;
+          lastAttemptTime = currentTime;
+        }
+        callback(false);
+     };
+     img.src = targetImageUrl2 == &quot;&quot; ? targetImageUrl : targetImageUrl2;
+   }
+
+   function displayImage() {
+     const img = document.createElement(&quot;img&quot;);
+     img.src = targetImageUrl2 == &quot;&quot; ? targetImageUrl : targetImageUrl2;
+     img.className = &quot;full-width-image&quot;;
+     img.onclick = toggleContent;
+     img.onerror = handleImageError;
+     container{pid}.innerHTML = &quot;&quot;;
+     container{pid}.appendChild(img);
+     isEmoji = false;
+   }
+
+   function displayEmoji() {
+     container{pid}.innerHTML = `&lt;span class=&quot;emoji&quot; onclick=&quot;toggleContent()&quot;&gt;${emoji{pid}}&lt;/span&gt;`;
+     isEmoji = true;
+   }
+
+   function handleImageError() {
+     const currentTime = Date.now();
+     if (currentTime - lastAttemptTime &gt;= 5000) {
+       this.src = targetImageUrl + &quot;?v=&quot; + currentTime;
+       targetImageUrl2 = this.src;
+       lastAttemptTime = currentTime;
+     }
+   }
+  &lt;/script&gt;
+ &lt;/body&gt;&lt;/html&gt;{questionText}
+&lt;div class=&quot;centered-buttons&quot;&gt;
+&lt;&lt;button &quot;{b1Text}&quot;&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+{b1Logic}
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;{b2Text}&quot;&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+{b2Logic}
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;{b3Text}&quot;&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+{b3Logic}
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;{b4Text}&quot;&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+{b4Logic}
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;🔊&quot;&gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.4 play&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🎵&quot;&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🗣️&quot;&gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.5 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🔇&quot;&gt;&gt; &lt;&lt;masteraudio stop&gt;&gt; &lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[◀️|{prevPageName}]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🏠&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;window.location.href=&quot;https://joe.ackop.com/&quot;&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button [[▶️|{nextPageName}]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt; 
+&lt;/div&gt;&lt;html&gt;
+&lt;div class=&quot;centered-buttons&quot;&gt; &lt;p&gt;Counter: &lt;span id=&quot;counterDisplay&quot;&gt;0&lt;/span&gt;&lt;/p&gt;
+&lt;button id=&quot;upvoteButton&quot; onclick=&quot;toggleUpvote()&quot;&gt;👍&lt;/button&gt; &lt;button id=&quot;downvoteButton&quot; onclick=&quot;toggleDownvote()&quot;&gt;👎&lt;/button&gt; 
+&lt;/div&gt;
+&lt;style&gt;
+#upvoteButton { }
+#upvoteButton.upvoted { background-color: #4CAF50; color: white; }
+#downvoteButton { }
+#downvoteButton.downvoted { background-color: red; color: white; }
+&lt;/style&gt;
+&lt;script&gt;
+// JavaScript code to manage the counter and API calls
+counter = 0; // Initialize the counter at zero
+hasUpvoted = false; // Track whether the user has upvoted or not
+hasDownvoted = false;
+upbutton = document.getElementById(&quot;upvoteButton&quot;);
+downbutton = document.getElementById(&quot;downvoteButton&quot;);
+
+// Function to toggle upvote and handle the API call
+async function toggleUpvote() {
+    if (!hasUpvoted) {
+        // User is upvoting, increment the counter
+        if (hasDownvoted) {
+            downbutton.classList.remove(&quot;downvoted&quot;);
+            hasDownvoted = false;
+            counter++;
+        }
+        counter++;
+        voteValue = 1;
+        hasUpvoted = true;
+        upbutton.classList.add(&quot;upvoted&quot;);
+    } else {
+        // User is removing the upvote, decrement the counter
+        counter--;
+        voteValue = 0;
+        hasUpvoted = false;
+        upbutton.classList.remove(&quot;upvoted&quot;);
+    }
+
+    document.getElementById(&apos;counterDisplay&apos;).innerHTML = counter;
+
+    // Call the API to register the upvote/downvote
+    try {
+        response = await fetch(&apos;https://joe.ackop.com/api/v020/vote00010&apos;, {
+            method: &apos;POST&apos;,
+            headers: {
+                &apos;Content-Type&apos;: &apos;application/json&apos;,
+            },
+            body: JSON.stringify({
+                vote_type_id: &quot;u&quot;,
+                asset_type_id: &quot;c&quot;, 
+                internal_id: &quot;{storyId}&quot;,
+                external_id: &quot;{pid}&quot;,
+                vote_value: voteValue
+            }),
+        });
+        data = await response.json();
+        console.log(&apos;db response:&apos;, data);
+    } catch (error) {
+        console.error(&apos;Error sending vote:&apos;, error);
+    }
+}
+
+async function toggleDownvote() {
+    if (!hasDownvoted) {
+        // User is downvoting, decrement the counter
+        if (hasUpvoted) {
+            upbutton.classList.remove(&quot;upvoted&quot;);
+            hasUpvoted = false;
+            counter--;
+        }
+        counter--;
+        voteValue = -1;
+        hasDownvoted = true;
+        downbutton.classList.add(&quot;downvoted&quot;);
+    } else {
+        // User is removing the downvote, increment the counter
+        counter++;
+        voteValue = 0;
+        hasDownvoted = false;
+        downbutton.classList.remove(&quot;downvoted&quot;);
+    }
+
+    document.getElementById(&apos;counterDisplay&apos;).innerHTML = counter;
+
+    // Call the API to register the upvote/downvote
+    try {
+        response = await fetch(&apos;https://joe.ackop.com/api/v020/vote00010&apos;, {
+            method: &apos;POST&apos;,
+            headers: {
+                &apos;Content-Type&apos;: &apos;application/json&apos;,
+            },
+            body: JSON.stringify({
+                vote_type_id: &quot;d&quot;,  
+                asset_type_id: &quot;c&quot;, 
+                internal_id: &quot;{storyId}&quot;,
+                external_id: &quot;{pid}&quot;,
+                vote_value: voteValue
+            }),
+        });
+        data = await response.json();
+        console.log(&apos;API response:&apos;, data);
+    } catch (error) {
+        console.error(&apos;Error sending vote:&apos;, error);
+    }
+}
+
+// Async function to fetch the initial value from an API
+async function fetchInitialValue() {
+    try {
+        // Simulate API call with fetch (replace with actual API endpoint)
+        response = await fetch(&apos;https://joe.ackop.com/api/v020/vote_sum00010?vote_type_id=u&amp;asset_type_id=c&amp;internal_id={storyId}&amp;external_id={pid}&apos;);
+        data = await response.json();
+        counter = data.vote_total; 
+        document.getElementById(&apos;counterDisplay&apos;).innerHTML = counter;
+    } catch (error) {
+        console.warn(&apos;Error fetching initial value:&apos;, error);
+        document.getElementById(&apos;counterDisplay&apos;).innerHTML = counter;
+    }
+}
+
+fetchInitialValue();
+&lt;/script&gt;
+&lt;/html&gt;
+
+
+
+</tw-passagedata>

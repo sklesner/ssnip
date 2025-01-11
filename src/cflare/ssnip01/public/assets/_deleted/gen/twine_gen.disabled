@@ -1,0 +1,90 @@
+const fs = require('fs');
+
+function sceneTest(content: string): boolean {
+    const regex = /[\s\S]*?(<scene>[\s\S]*?<\/scene>[\s\S]*?){6}/ism;
+    return regex.test(content);
+}
+
+function makeSceneArray(text: string): string[] {
+    const sceneRegex = /<scene>([\s\S]*?)<\/scene>/g;
+    const scenes: string[] = [];
+    let match;
+  
+    while ((match = sceneRegex.exec(text)) !== null) {
+      scenes.push(match[1].trim());
+    }
+  
+    return scenes;
+}
+
+
+function makeTwineHeader(template:string, storyName: string): string {
+  return template
+    .replace(/<storyName>/g, storyName)
+    ;
+}
+
+
+
+function makeTwineScene(template:string, pid: string, pageName: string, nextPageName: string, sceneText: string, emoji: string): string {
+  return template
+    .replace(/<pid>/g, pid)
+    .replace(/<pageName>/g, pageName)
+    .replace(/<nextPageName>/g, nextPageName)
+    .replace(/<sceneText>/g, sceneText)
+    .replace(/<emoji>/g, emoji)
+    ;
+}
+
+function makeTwineFooter(template:string, storyName: string): string {
+    return template
+    .replace(/<storyName>/g, storyName)
+    ;
+}
+
+function loadTextFile(filePath: string): string {
+  try {
+      return fs.readFileSync(filePath, 'utf8');
+  } catch (error) {
+      console.error(`Error reading file from ${filePath}:`, error);
+      return '';
+  }
+}
+
+function makeTwine(storyName: string, sceneArray: string[] ): string {
+  
+  const headerTemplate = loadTextFile("twine_header.txt");
+  const sceneTemplate = loadTextFile("twine_scene.txt");
+  const footerTemplate = loadTextFile("twine_footer.txt"); 
+
+  return makeTwineHeader(headerTemplate,storyName) 
+    +  makeTwineScene(sceneTemplate,"2","2","3", sceneArray[0],[...storyName][0])
+    +  makeTwineScene(sceneTemplate,"3","3","4", sceneArray[1],[...storyName][1])
+    +  makeTwineScene(sceneTemplate,"4","4","5", sceneArray[2],[...storyName][2])
+    +  makeTwineScene(sceneTemplate,"5","5","6", sceneArray[3],[...storyName][3])
+    +  makeTwineScene(sceneTemplate,"6","6","7", sceneArray[4],[...storyName][4])
+    +  makeTwineScene(sceneTemplate,"7","7","2", sceneArray[5],[...storyName][5])
+    +  makeTwineFooter(footerTemplate,storyName) 
+}
+
+try {
+    const fileContent = fs.readFileSync('sample_input.txt', 'utf-8');
+    const sceneArray = makeSceneArray(fileContent);
+    // console.log(sceneArray)
+
+    
+
+    // const bob = "☕💎🎶👩‍🦳🗽🍞";
+
+    // const emojis = emoji.replace(bob, (match) => `${match}\n`).trim().split('\n');
+
+    // emojis.forEach(e => console.log(e));
+
+    fs.writeFileSync('twine.html', makeTwine("☕💎🎶👩🗽🍞", sceneArray), 'utf8');
+
+    // console.log(`The file ${result ? 'contains' : 'does not contain'} the string "<scene>"`);
+} catch (error) {
+    console.error('Error:', error);
+}
+
+

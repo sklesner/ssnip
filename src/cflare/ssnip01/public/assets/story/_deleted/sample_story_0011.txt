@@ -1,0 +1,106 @@
+<plan>
+The story follows a young character named Archie, who is overly confident and dismisses others' opinions. Through a series of whimsical and sometimes odd experiences, Archie learns that seeking and accepting feedback can make things better for everyone. The six scenes are tied together by a series of unfortunate and humorous mistakes Archie makes, each symbolized by the following emojis in order: 🍕 🐧 🍹 🐿️ 🎲 🍌. The emojis hint at different events or items in each scene.
+
+- **Scene 1 (🍕):** Archie makes a pizza by himself, refusing any advice. The pizza turns out bizarrely bad, leading to chaos. 
+- **Scene 2 (🐧):** Archie visits a zoo and decides to "help" the penguins by changing their environment. Again, he ignores others' suggestions.
+- **Scene 3 (🍹):** At a party, Archie makes an unusual drink and offers it to everyone. It has unintended effects.
+- **Scene 4 (🐿️):** Archie encounters a squirrel, dismisses what others say about its behavior, and gets into a funny predicament.
+- **Scene 5 (🎲):** Archie tries to play a game of chance by his own rules, leading to a messy situation.
+- **Scene 6 (🍌):** Archie finally realizes the value of feedback after a mishap involving a banana peel and receives helpful advice, saving the day.
+</plan>
+
+<scene>
+Archie stood proudly in his kitchen, dusted with flour, ready to create the world's greatest pizza. He piled on everything he loved—strawberries, marshmallows, even pickles—and ignored his friend Milo's warning that perhaps he should reconsider. When the oven dinged, Archie pulled out his masterpiece, only to find it had melted into a gloopy mess that stuck to the pan like glue. Still, he grinned, pretending it was perfect, until the cheese began to bubble over the edges, dripping onto the floor, and set off the fire alarm.  
+</scene>
+
+<picture>A lopsided pizza oozing with strange toppings—melting strawberries, gooey marshmallows, and dripping pickles.</picture>
+
+<question>Why did Archie ignore Milo’s advice when making the pizza?</question>
+
+<answer>He thought his own ideas were always better, even though Milo had experience making pizzas before.</answer>
+
+<decoy>He believed Milo was trying to sabotage his pizza-making efforts.</decoy>
+
+<decoy>Archie wanted to make a pizza so unique that it didn't matter what others thought.</decoy>
+
+<decoy>He didn't hear Milo's advice because the kitchen was too noisy.</decoy>
+
+<scene>
+Archie, still determined to prove himself, visited the zoo next. At the penguin exhibit, he noticed the little birds waddling around and decided that they would enjoy it much more if he rearranged the rocks in their habitat. As he started moving things around, the penguins slid awkwardly into the water, slipping and bumping into each other. A zookeeper gently told Archie that the penguins were perfectly fine with how things were, but Archie waved him off, insisting he knew best. Moments later, one penguin tripped over the misplaced rocks and plopped into a heap of feathers. Archie blinked, unsure what went wrong.  
+</scene>
+
+<picture>A confused penguin, flapping its wings and trying to regain balance after slipping on an awkwardly placed rock.</picture>
+
+<question>Why did Archie think the penguins needed help with their environment?</question>
+
+<answer>He believed that because he didn't like the way it looked, the penguins wouldn’t either, even though he knew little about them.</answer>
+
+<decoy>He had read that penguins prefer a perfectly flat surface.</decoy>
+
+<decoy>He thought the zookeeper had made a mistake and was trying to fix it for them.</decoy>
+
+<decoy>He overheard someone say penguins like rearranged spaces and misunderstood the advice.</decoy>
+
+<scene>
+Later that evening, Archie decided to mix up some drinks at a party. Without asking what people liked, he threw random ingredients into a blender—cabbage juice, mint, and something labeled "super fizz." The concoction smelled odd, but Archie, as confident as ever, poured it into tall glasses and handed them out. One sip, and everyone's faces scrunched up in horror. The fizz exploded out of the cups, soaking the table, the guests, and even the ceiling in green foam. Archie scratched his head, wondering why no one seemed to enjoy his creation.  
+</scene>
+
+<picture>A foamy green drink splashing out of a cup, with bubbles rising and a messy puddle spreading on the floor.</picture>
+
+<question>What went wrong with Archie's drink at the party?</question>
+
+<answer>Archie didn’t ask anyone for their preferences or feedback before making the drink.</answer>
+
+<decoy>The blender wasn’t powerful enough to mix the ingredients properly.</decoy>
+
+<decoy>The cups he used were too small, and that’s why the fizz exploded everywhere.</decoy>
+
+<decoy>Everyone just had bad taste and didn't appreciate Archie's creativity.</decoy>
+
+<scene>
+The next day, Archie encountered a squirrel in the park. The little critter seemed interested in him, twitching its bushy tail and chittering. Some nearby children warned Archie that the squirrel was probably looking for food and would get upset if he tried to pet it. But Archie, certain that he knew better, reached out anyway. In an instant, the squirrel darted up his arm, sending Archie spinning in circles trying to shake it off. Eventually, it leapt away, leaving Archie dizzy and embarrassed, much to the children’s giggles.
+</scene>
+
+<picture>A quick, darting squirrel with a fluffy tail, sitting upright and eyeing Archie curiously from a distance.</picture>
+
+<question>Why did Archie end up spinning in circles after trying to pet the squirrel?</question>
+
+<answer>He ignored the children's advice that the squirrel was looking for food and might not want to be touched.</answer>
+
+<decoy>The squirrel didn’t like Archie’s clothes, which made it behave strangely.</decoy>
+
+<decoy>The squirrel thought Archie was another animal and became confused.</decoy>
+
+<decoy>Archie startled the squirrel by moving too fast, causing it to panic.</decoy>
+
+<scene>
+Determined to turn things around, Archie joined a game of chance at the local fair. He watched as people tossed dice to win prizes, but he was sure that his strategy—tossing the dice with his eyes closed—would guarantee success. The others tried to explain how the game really worked, but Archie, stubborn as ever, waved them away. He tossed the dice, and to his horror, they rolled right off the table and into a nearby bucket of paint. Covered in splashes of color, Archie realized his big idea hadn’t worked out as planned. He sighed, beginning to wonder if perhaps he should’ve listened.
+</scene>
+
+<picture>Two colorful dice, one barely visible beneath splashes of bright blue and yellow paint.</picture>
+
+<question>Why did Archie's strategy fail in the dice game?</question>
+
+<answer>He ignored the rules and advice, thinking he could win with his eyes closed, but that led to a mess instead.</answer>
+
+<decoy>The dice were rigged, making it impossible for anyone to win without cheating.</decoy>
+
+<decoy>He didn't realize that using too much force would cause the dice to roll out of control.</decoy>
+
+<decoy>The table was too small, which caused the dice to bounce in the wrong direction.</decoy>
+
+<scene>
+The final straw came when Archie, walking home, slipped on a banana peel. His feet flew out from under him, and he landed flat on his back. This time, an older woman passing by offered him a hand and gently told him that sometimes, it's best to look where you're going and pay attention to the advice others offer. Archie's cheeks flushed red, but he smiled sheepishly and nodded. The next day, he asked Milo for tips on making pizza. This time, when he pulled it from the oven, it was crispy, delicious, and best of all, everyone wanted a slice.
+</scene>
+
+<picture>A simple, ripe banana peel lying on a sidewalk, slightly curled at the edges and glistening in the sun.</picture>
+
+<question>What made Archie finally ask Milo for advice on making pizza again?</question>
+
+<answer>After slipping on the banana peel, he realized that listening to others' advice could help him avoid more mistakes.</answer>
+
+<decoy>He realized that Milo had been sabotaging him all along and needed to make amends.</decoy>
+
+<decoy>The older woman convinced him that only expert advice would make his food better.</decoy>
+
+<decoy>Archie finally understood that Milo’s pizza-making skills were better than his own.</decoy>

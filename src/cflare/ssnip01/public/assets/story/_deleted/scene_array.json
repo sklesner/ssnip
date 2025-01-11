@@ -1,0 +1,57 @@
+[
+    {
+        "picture_url": "https://www.cflare.com/assets/story/2.jpg",
+        "picture_words": "Cat playing with a ball",
+        "story_words": "A playful cat is having fun with a ball of yarn.",
+        "music_url": "https://www.cflare.com/assets/story/2.mp3",
+        "music_words": "Upbeat melody with piano",
+        "sound_url": "https://www.cflare.com/assets/story/2.mp3",
+        "sound_words": "Cat meowing"
+    },
+    {
+        "picture_url": "https://www.cflare.com/assets/story/3.jpg",
+        "picture_words": "Bird flying in the sky",
+        "story_words": "A colorful bird is soaring high in the blue sky.",
+        "music_url": "https://www.cflare.com/assets/story/3.mp3",
+        "music_words": "Gentle tune with strings",
+        "sound_url": "https://www.cflare.com/assets/story/3.mp3",
+        "sound_words": "Bird chirping"
+    },
+    {
+        "picture_url": "https://www.cflare.com/assets/story/4.jpg",
+        "picture_words": "Horse running on a field",
+        "story_words": "A majestic horse is galloping across a green field.",
+        "music_url": "https://www.cflare.com/assets/story/4.mp3",
+        "music_words": "Energetic rhythm with drums",
+        "sound_url": "https://www.cflare.com/assets/story/4.mp3",
+        "sound_words": "Horse neighing"
+    },
+    {
+        "picture_url": "https://www.cflare.com/assets/story/5.jpg",
+        "picture_words": "Fish swimming in a tank",
+        "story_words": "A vibrant fish is swimming gracefully in a large tank.",
+        "music_url": "https://www.cflare.com/assets/story/5.mp3",
+        "music_words": "Relaxing harmony with flutes",
+        "sound_url": "https://www.cflare.com/assets/story/5.mp3",
+        "sound_words": "Water bubbling"
+    },
+    {
+        "picture_url": "https://www.cflare.com/assets/story/6.jpg",
+        "picture_words": "Rabbit hopping in the garden",
+        "story_words": "A cute rabbit is hopping around in a colorful garden.",
+        "music_url": "https://www.cflare.com/assets/story/6.mp3",
+        "music_words": "Joyful beat with guitars",
+        "sound_url": "https://www.cflare.com/assets/story/6.mp3",
+        "sound_words": "Rabbit munching"
+    },
+    {
+        "picture_url": "https://www.cflare.com/assets/story/7.jpg",
+        "picture_words": "Elephant splashing water",
+        "story_words": "A playful elephant is splashing water with its trunk.",
+        "music_url": "https://www.cflare.com/assets/story/7.mp3",
+        "music_words": "Rhythmic tune with percussion",
+        "sound_url": "https://www.cflare.com/assets/story/7.mp3",
+        "sound_words": "Elephant trumpeting"
+    }
+]
+```
