@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageDrop | Modern Image Upload</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --bg: #f9fafb;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .input-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-container label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+            outline: none;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        input[type="date"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Calendar icon styling */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: 0.2s;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+        #pasteArea {
+            width: 100%;
+            min-height: 200px;
+            border: 2px dashed #e5e7eb;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+            padding: 2rem;
+        }
+
+        #pasteArea:hover {
+            border-color: var(--primary);
+            background: #f5f7ff;
+        }
+
+        #pasteArea p {
+            margin: 0.5rem 0;
+            text-align: center;
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            display: none;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+        }
+
+        .button-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-secondary {
+            background: white;
+            border: 1px solid #e5e7eb;
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            color: var(--error);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        #result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background: #f8fafc;
+            display: none;
+        }
+
+        #result h2 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        #resultImage {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .image-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .format-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ImageDrop</h1>
+        <p class="subtitle">Upload, paste, or drag your images</p>
+        
+        <div class="input-group">
+            <div class="input-container">
+                <label for="eventPrefix">Event Name</label>
+                <input type="text" id="eventPrefix" placeholder="Enter an event prefix e.g. CS482: ..." value="">
+            </div>
+            <div class="input-container">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate">
+            </div>
+        </div>
+
+        <div class="image-controls">
+            <button id="removeImage" class="button button-secondary" style="display: none;">
+                Remove Image
+            </button>
+        </div>
+
+        <div id="pasteArea">
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            <p><strong>Drop your image here</strong></p>
+            <!-- <span style="color: var(--text-light);">or click to upload from computer</span> -->
+            <p style="color: var(--text-light);">or paste from clipboard</p> 
+            <div class="format-info">
+                <span>Supported: JPG, PNG, GIF, WebP (Max 5MB)</span>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <img id="preview" alt="Preview">
+        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+        
+        <button id="submitBtn" class="button button-primary" disabled>Upload Image</button>
+
+        <div id="result">
+            <h2>Upload Complete</h2>
+            <p>Event Name: <span id="resultPrefix"></span></p>
+            <img id="resultImage" alt="Uploaded Image">
+        </div>
+    </div>
+
+    <script>
+        // Previous JavaScript remains the same
+        const pasteArea = document.getElementById('pasteArea');
+        const preview = document.getElementById('preview');
+        const submitBtn = document.getElementById('submitBtn');
+        const result = document.getElementById('result');
+        const resultPrefix = document.getElementById('resultPrefix');
+        const resultImage = document.getElementById('resultImage');
+        const eventPrefixInput = document.getElementById('eventPrefix');
+        const removeImageBtn = document.getElementById('removeImage');
+        const fileInput = document.getElementById('fileInput');
+        const errorMessage = document.getElementById('errorMessage');
+
+        const MAX_FILE_SIZE = 5 * 1024 * 1024;
+        const MAX_IMAGE_WIDTH = 4096;
+        const MAX_IMAGE_HEIGHT = 4096;
+        const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        let pastedImage = null;
+
+        // Add drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            pasteArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            pasteArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            pasteArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            pasteArea.style.borderColor = 'var(--primary)';
+            pasteArea.style.background = '#f5f7ff';
+        }
+
+        function unhighlight(e) {
+            pasteArea.style.borderColor = '#e5e7eb';
+            pasteArea.style.background = '#f9fafb';
+        }
+
+        pasteArea.addEventListener('drop', handleDrop, false);
+
+        async function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const file = dt.files[0];
+            
+            if (file && file.type.startsWith('image/')) {
+                try {
+                    await validateImage(file);
+                    handleImageFile(file);
+                } catch (error) {
+                    showError(error.message);
+                }
+            }
+        }
+
+        // Set default date to current date
+        function setDefaultDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            document.getElementById('startDate').value = `${year}-${month}-${day}`;
+        }
+
+        // Call setDefaultDate when the page loads
+        setDefaultDate();
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        async function validateImage(file) {
+            if (file.size > MAX_FILE_SIZE) {
+                throw new Error(`File size exceeds 5MB limit. Current size: ${(file.size / (1024 * 1024)).toFixed(2)}MB`);
+            }
+
+            if (!ALLOWED_TYPES.includes(file.type)) {
+                throw new Error('Unsupported file type. Please use JPG, PNG, GIF, or WebP');
+            }
+
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+
+                img.onload = () => {
+                    URL.revokeObjectURL(img.src);
+                    if (img.width > MAX_IMAGE_WIDTH || img.height > MAX_IMAGE_HEIGHT) {
+                        reject(new Error(`Image dimensions exceed maximum limit of ${MAX_IMAGE_WIDTH}x${MAX_IMAGE_HEIGHT} pixels`));
+                    }
+                    resolve(true);
+                };
+
+                img.onerror = () => {
+                    URL.revokeObjectURL(img.src);
+                    reject(new Error('Failed to load image'));
+                };
+            });
+        }
+
+        document.addEventListener('paste', async function(e) {
+            const items = e.clipboardData.items;
+            
+            for (let item of items) {
+                if (item.type.indexOf('image') !== -1) {
+                    const file = item.getAsFile();
+                    try {
+                        await validateImage(file);
+                        handleImageFile(file);
+                    } catch (error) {
+                        showError(error.message);
+                    }
+                    break;
+                }
+            }
+        });
+
+        fileInput.addEventListener('change', async function(e) {
+            if (e.target.files && e.target.files[0]) {
+                try {
+                    await validateImage(e.target.files[0]);
+                    handleImageFile(e.target.files[0]);
+                } catch (error) {
+                    showError(error.message);
+                    fileInput.value = '';
+                }
+            }
+        });
+
+        function handleImageFile(file) {
+            pastedImage = file;
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                removeImageBtn.style.display = 'inline-block';
+                pasteArea.style.display = 'none';
+                updateSubmitButton();
+            };
+            
+            reader.readAsDataURL(pastedImage);
+        }
+
+        removeImageBtn.addEventListener('click', function() {
+            pastedImage = null;
+            preview.style.display = 'none';
+            removeImageBtn.style.display = 'none';
+            pasteArea.style.display = 'flex';
+            updateSubmitButton();
+        });
+
+        pasteArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        function updateSubmitButton() {
+            submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim();
+        }
+
+        eventPrefixInput.addEventListener('input', updateSubmitButton);
+
+        submitBtn.addEventListener('click', function() {
+            resultPrefix.textContent = eventPrefixInput.value;
+            const startDate = document.getElementById('startDate').value;
+            const formattedDate = new Date(startDate).toLocaleDateString();
+            resultPrefix.innerHTML = `${eventPrefixInput.value}<br>Date: ${formattedDate}`;
+            resultImage.src = preview.src;
+            result.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
