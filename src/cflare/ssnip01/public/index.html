@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Story List</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <style>
+
+        #header,
+        #header_ty,
+        #footer {
+            font-family: Arial, sans-serif;
+            /* font-size: 36vw; */
+            font-size: 6vw;
+            font-weight: bold;
+        }
+
+        /* Style for the header */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8vw;
+            background-color: #333;
+            color: #fff;
+            font-size: 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        /* Style for the button in the header */
+        #header button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 1vw 1vw;
+            border-radius: 1vw;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #header button:hover {
+            background-color: #0056b3;
+        }
+
+        #header_ty {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 7vw;
+            font-size: 4vw;
+            background-color: #333;
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        /* Style for the container */
+        #emojiContainer {
+            padding-top: 7vw;
+            max-height: 94vh; 
+            overflow-y: scroll; 
+        }
+
+
+        /* Style for each emoji box */
+        .emoji-box {
+            padding: 1vw;
+            margin: 1vw;
+            border-radius: 0.1vw;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 9vw; /* Increase font size of emojis */
+            line-height: 1.3; /* Adjust line height for proper vertical alignment */
+        }
+
+        /* Different colors for emoji boxes */
+        .emoji-box:nth-child(odd) {
+            background-color: #FFDDC1;
+        }
+
+        .emoji-box:nth-child(even) {
+            background-color: #C1FFDD;
+        }
+
+        /* Footer styles */
+        footer {
+            position: fixed;
+            padding-top: 1vw;
+            height: 9.5vw;
+            bottom: 0vw;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 0vw;
+            text-align: center;
+        }
+
+        .add-story-btn {
+            background-color: #2e78f9;
+            /* border: none; */
+            border-radius: 4vw;
+            padding: .7vw 6vw;
+            font-size: 5vw;
+            margin: 1vw;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-shadow:0px 0.1vw 0px #263666;
+            background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+        }
+
+        .add-story-btn:hover {
+            background-color: #FF8C00;
+            background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+            /* background-color:#0688fa; */
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <!-- <div id="thankYouMessage" >
+        Thank You for your suggestion. Please check back in a few hours to see your story.
+    </div> -->
+    
+    <div id="header">
+        <!-- <button onclick="window.location.href='http://design_story.com'">Add New Story</button> -->
+        CHOOSE A STORY
+    </div>
+
+    <div id="header_ty">
+        <!-- <button onclick="window.location.href='http://design_story.com'">Add New Story</button> -->
+        THANK YOU for your suggestion! We pick ten each day. Check tomorrow.
+    </div>
+    
+    <div id="emojiContainer">
+        <!-- Emojis will be populated here -->
+    </div>
+    
+    <!-- Footer with "Add New Story" button -->
+    <footer>
+        <button class="add-story-btn" onclick="window.location.href='suggest05.html'">SUGGEST A STORY</button>
+    </footer>
+
+    <script>
+        async function fetchStoryList() {
+            try {
+                const response = await fetch('https://joe.ackop.com/api/v020/story_list_0012');
+                const data = await response.json();
+                
+                let elist = data.map(item => [item.external_id.replace(/-/g,''), item.external_id]);
+
+                // const outputElement = document.getElementById('output');
+                // outputElement.textContent = JSON.stringify(elist, null, 4);
+
+                return elist;
+            } catch (error) {
+                console.error('Error fetching story list:', error);
+                return [
+                    // ["👻🤖👽👾🦕🦉", "fgsdfgsd"],
+                    // ["🎈🌵🦉🍉🚁🎻", "sdfgdfgsdf"],
+                    // ["🌕🍒🦎🍓🚂🎷", "sdfsdfsd"],
+                    // ["🎉🌻🦖🍏🚜🎺", "sdfsdf"],
+                    // ["🌈🍋🦚🍇🚓🎶", "sdfsdsd"],
+                    // ["🎊🌼🦜🍔🚕🎵", "sadfwerwrw"],
+                    // ["🌙🍎🦢🍩🚢🎤", "sadfwerwrw"],
+                    // ["🎋🍉🦋🍖🚤🎼", "sadfwerwrw"],
+                    // ["🌠🍓🦗🍜🚘🎧", "sadfwerwrw"],
+                    // ["🎍🍑🦘🍛🚖🎸", "sadfwerwrw"],
+                    // ["🌌🍅🦙🍝🚍🎻", "sadfwerwrw"],
+                    // ["🎎🍈🦡🍞🚔🎷", "sadfwerwrw"],
+                    // ["🌑🍇🦒🍟🚐🎺", "sadfwerwrw"],
+                    // ["🎏🍊🦓🍠🚑🎶", "sadfwerwrw"],
+                    // ["🌔🍎🦂🍡🚎🎵", "sadfwerwrw"],
+                    // ["🎐🍋🦔🍢🚛🎤", "sadfwerwrw"],
+                    // ["🌖🍌🦕🍣🚚🎼", "sadfwerwrw"],
+                    // ["🎒🍍🦏🍤🚜🎧", "sadfwerwrw"],
+                    // ["🌓🍏🦜🍥🚝🎸", "sadfwerwrw"],
+                    // ["🎑🍐🦑🍦🚞🎻", "sadfwerwrw"]
+                ];
+            }
+        }
+
+        fetchStoryList().then(result => {
+            console.log(result);
+        });
+        
+        const emojiContainer = document.getElementById('emojiContainer');
+        
+        fetchStoryList().then(elist => {            
+            elist.forEach(emojiString => {
+                let emojiBox = document.createElement('div');
+                emojiBox.classList.add('emoji-box');
+                console.log(emojiString[0]);
+                console.log(emojiString[1]);
+                emojiBox.textContent = emojiString[0];
+    
+                // Redirect when an emoji box is clicked
+                emojiBox.addEventListener('click', function() {
+                    // window.location.href = `nextPage.html?emojis=${encodeURIComponent(emojiString[1])}`;
+                    window.location.href = `https://twine.ackop.com/${encodeURIComponent(emojiString[1])}.html`; // TODO: put in a default story
+                });
+    
+                emojiContainer.appendChild(emojiBox);
+            });
+        });
+        
+        // Check for URL parameters
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
+
+        // window.onload = function() {
+        //     document.body.style.zoom = "100%";
+        //     if (getURLParameter('m') && getURLParameter('m').length > 0) {
+        //         console.log('Thank You! Your story has been submitted.');
+        //         document.getElementById('header_ty').style.display = 'flex';
+        //         document.getElementById('header').style.display = 'none';
+        //         document.getElementById('header_ty').innerHTML = `THANK YOU for ${getURLParameter('m')}<br>We pick ten each day. Check tomorrow.`;
+        //         // if (true or getURLParameter('m').includes('😉')) {
+        //         if (True || getURLParameter('m').includes('😉')) {
+        //             fetch(`http://18.222.213.41:8080/ss?ss=${getURLParameter('m')}`) // using the mParam value as the emoji parameter
+        //             .then(response => {
+        //                 if(response.ok) {
+        //                     console.log("GET request sent successfully.");
+        //                     return response.text();
+        //                 } else {
+        //                     throw new Error("Failed to send GET request.");
+        //                 }
+        //             })
+        //             .then(data => {
+        //                 console.log(data); // Log the response data from the server
+        //             })
+        //             .catch(error => {
+        //                 console.log(error.message);
+        //             });
+        //         };
+        //     }
+        // }
+    
+    </script>
+
+</body>
+
+</html>

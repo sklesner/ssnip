@@ -1,0 +1,60 @@
+Confirmation Bias: Only looking for information that agrees with what you already believe.
+Availability Heuristic: Thinking something is more likely because it's easier to remember.
+Bandwagon Effect: Doing or believing something because many other people do.
+Anchoring Bias: Relying too heavily on the first piece of information you learn.
+Overconfidence Bias: Being too sure about your abilities or knowledge.
+Dunning-Kruger Effect: Thinking you know more than you actually do when you're a beginner.
+Sunk Cost Fallacy: Continuing something just because you've already spent time or money on it.
+Self-Serving Bias: Taking credit for good things and blaming others for bad things.
+Negativity Bias: Paying more attention to bad things than good things.
+Halo Effect: Thinking everything about a person is good because you like one thing about them.
+Fundamental Attribution Error: Blaming others' actions on their personality, but excusing your own actions because of circumstances.
+In-Group Bias: Favoring people who are similar to you or in your group.
+Optimism Bias: Thinking bad things are less likely to happen to you than to others.
+Pessimism Bias: Always expecting the worst to happen.
+Recency Bias: Giving more importance to recent events than older ones.
+Primacy Effect: Remembering the first things you learn better than later things.
+Hindsight Bias: Thinking you knew something all along, but only after it has happened.
+Projection Bias: Assuming others think and feel the same way you do.
+Curse of Knowledge: Finding it hard to imagine not knowing something once you've learned it.
+Spotlight Effect: Thinking others are paying more attention to you than they really are.
+Gambler's Fallacy: Believing that past events affect future outcomes in random processes.
+Stereotyping: Assuming all people or things in a group are the same.
+Narrative Fallacy: Creating stories to explain things, even when they're just random.
+Survivorship Bias: Only paying attention to successful examples and ignoring failures.
+Decoy Effect: Changing your choice between two options when a third, less attractive option is added.
+Framing Effect: Making different decisions based on how information is presented.
+Ostrich Effect: Ignoring negative information or problems hoping they'll go away.
+Backfire Effect: Believing something more strongly when presented with evidence against it.
+Reactance: Doing the opposite of what someone wants you to do to prove you have free will.
+Placebo Effect: Feeling better just because you think something will help you.
+False Consensus Effect: Overestimating how much others agree with you.
+Illusion of Control: Thinking you have more control over events than you actually do.
+Just-World Hypothesis: Believing that good things happen to good people and bad things to bad people.
+Clustering Illusion: Seeing patterns in random events where none actually exist.
+Mere Exposure Effect: Liking something more just because you've seen it many times.
+Dunbar's Number: Believing you can maintain more close relationships than you actually can.
+Zeigarnik Effect: Remembering unfinished tasks better than completed ones.
+IKEA Effect: Valuing things more if you made them yourself.
+Peak-End Rule: Judging an experience based on how you felt at its peak and at its end.
+Illusion of Transparency: Thinking others can understand your thoughts and feelings better than they actually can.
+Planning Fallacy: Underestimating how long tasks will take to complete.
+Barnum Effect: Believing vague personality descriptions apply specifically to you.
+Self-Fulfilling Prophecy: Causing something to happen by believing it will happen.
+Bystander Effect: Being less likely to help someone in need when others are present.
+Status Quo Bias: Preferring things to stay the same and resisting change.
+Illusory Superiority: Overestimating your own qualities and abilities compared to others.
+Functional Fixedness: Having trouble using objects in new ways.
+Empathy Gap: Underestimating the influence of emotions on behavior and decision making.
+Regression to the Mean: Mistaking natural fluctuations for meaningful changes.
+Reciprocity Bias: Feeling obligated to return a favor, even if you didn't want the original favor.
+Authority Bias: Trusting information from authority figures more than from others.
+Contrast Effect: Judging something based on how it compares to other things, rather than on its own merits.
+Illusion of Validity: Overestimating your ability to predict outcomes based on patterns.
+Moral Licensing: Feeling okay about doing something bad because you've done something good.
+Semmelweis Reflex: Rejecting new evidence that contradicts established beliefs.
+Denomination Effect: Being more likely to spend smaller bills or coins than larger ones.
+Anthropomorphism: Attributing human characteristics to non-human things or animals.
+Information Bias: Seeking more information even when it doesn't affect the decision.
+Attribute Substitution: Answering a difficult question by substituting an easier one.
+Default Effect: Tending to stick with pre-set options or the way things are already set up.

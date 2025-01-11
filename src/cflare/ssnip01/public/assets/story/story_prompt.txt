@@ -1,0 +1,49 @@
+Using the <style> below write a six chapter story to teach children the <lesson> below. Have each chapter inspired by one of the following six emoji {six_emoji}.
+Tell the story using dialoge between characters. Use words to show the story rather than just tell it. 
+Follow the same one or two+ characters for all six chapters with events logically connected across chapters. Conclude the last chapter with a satisfying ending. 
+Your output must follow the <format> given below.
+
+<lesson>
+{story_lesson}
+</lesson>
+
+<style>
+{story_style}</style>
+
+<format>
+Important output only valid JSON per the example below.
+
+The "story_plan" is where you plan out the story.
+The chapter_array contains the six chapters. 
+For each chapter:
+    "chapter_emoji" is the emoji for that chapter.
+    "chapter_story" is the story for that chapter.
+    "chapter_picture" describes a single character or item that appears in that chapter. Do not output any duplicates. Each description must NOT name people or items, only describe them in detail. 
+    "chapter_question" is a thoughtful question to ask a child about that chapter. 
+    "correct_answer" is the correct answer to the question
+    "decoy_response_array" contains three thoughtful question responses that sound plausible but are incorrect with one longer than the correct_answer
+
+Your output must exactly match this example:
+
+{
+    "story_prompt":"{six_emoji}",
+    "story_plan":"plan your story here",
+    "chapter_array": [  
+        {
+            "chapter_emoji":"{first_emoji}",
+            "chapter_story": "...",
+            "chapter_picture": "...",
+            "chapter_question": "...",
+            "correct_answer": "...",
+            "decoy_answer_array": [
+                "...",
+                "...",
+                "..."
+            ]
+        },
+        // repeat 5 more times one per emoji
+    ]
+}
+<format>
+
+Think creatively but carefully!

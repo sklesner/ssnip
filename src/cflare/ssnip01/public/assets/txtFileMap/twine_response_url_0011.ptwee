@@ -1,0 +1,143 @@
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+    }
+    .page-container {
+        max-width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    h1 {
+        font-size: 18px;
+        word-wrap: break-word;
+    }
+    .rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .rating > span {
+        width: 120px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+    .stars {
+        display: inline-block;
+        direction: rtl;
+    }
+    .stars input[type="radio"] {
+        display: none;
+    }
+    .stars label {
+        font-size: 25px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .stars label:hover,
+    .stars label:hover ~ label,
+    .stars input[type="radio"]:checked ~ label {
+        color: #ffcc00;
+    }
+    .submit-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .submit-container input {
+        background-color: #ffcc00;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    textarea {
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+    }
+</style>
+
+<div class="page-container">
+    {messageText}
+    <div class="container">
+        <h1>Rate the story: (1 Star = Very Dissatisfied; 2 Stars = Dissatisfied; 3 Stars = Neither Satisfied nor Dissatisfied; 4 Stars = Satisfied; 5 Stars = Very Satisfied)</h1>
+        <form id="feedbackForm">
+            <div id="ratingQuestions"></div>
+            <div>
+                <label for="comments">Anything else to add?</label><br>
+                <textarea name="comments" id="comments" placeholder="Write your feedback here..."></textarea>
+            </div>
+            <div class="submit-container">
+                <input type="submit" value="Submit">
+            </div>
+            <p style="text-align: center;">Thank you for your feedback!</p>
+        </form>
+    </div>
+
+    <div style="text-align: center;">
+        <<button "{bText}">>
+            <<script>>
+            window.location.href="{bAction}"
+            <</script>>
+        <</button>>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { id: 'story', label: 'Story' },
+        { id: 'picture', label: 'Pictures' },
+        { id: 'narration', label: 'Narration' },
+        { id: 'music', label: 'Music' }
+    ];
+
+    function createRatingQuestion(question, index) {
+        const div = document.createElement('div');
+        div.className = 'rating';
+        div.innerHTML = `
+            <span id="${question.id}-label">${question.label}</span>
+            <div class="stars">
+                ${[5, 4, 3, 2, 1].map(value => `
+                    <input type="radio" id="star${value}-${index}" name="${question.id}" value="${value}" aria-labelledby="${question.id}-label"></input>
+                    <label for="star${value}-${index}">&#9733;</label>
+                `).join('')}
+            </div>
+        `;
+        return div;
+    }
+
+    const ratingQuestionsContainer = document.getElementById('ratingQuestions');
+    questions.forEach((question, index) => {
+        ratingQuestionsContainer.appendChild(createRatingQuestion(question, index));
+    });
+
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting
+
+        const feedback = {};
+
+        // Get ratings for all questions
+        questions.forEach(question => {
+            const rating = document.querySelector(`input[name="${question.id}"]:checked`);
+            feedback[question.id] = rating ? +rating.value : 0;
+        });
+
+        // Get the comments
+        feedback.comments = document.getElementById('comments').value;
+
+        // Convert feedback object to JSON
+        const jsonFeedback = JSON.stringify(feedback, null, 2);
+
+        // Log the JSON
+        console.log(jsonFeedback);
+    });
+</script>

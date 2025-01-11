@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .scene-box {
+            width: 100%;
+            border: 3px solid #1b1a1a;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .emoji-container {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .box {
+            width: 100%;
+            border: 1px solid #3e3d3d;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            display: block;
+            margin: 0 auto;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .caption-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .story-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .story-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        input {
+            width: 70%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scene-box">
+            <div class="emoji-container">
+                ☕
+            </div>
+
+            <div class="box">
+                <img src="https://twine.ackop.com/06ef85_picture_p2.png" alt="Image 1">
+                <div class="caption-container">
+                    <input type="text" id="caption6" value="Caption 6">
+                    <button onclick="picture_update(1)">Update</button>
+                </div>
+            </div>
+            
+            <div class="box">
+                <div class="story-container">
+                    <input type="text" id="caption6" value="Once upon a time....">
+                    <button onclick="story_update(1)">Update</button>
+                </div>
+            </div>
+            
+            <div class="box">
+                <audio controls>
+                    <source src="https://example.com/audio1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="caption-container">
+                    <input type="text" id="caption1" value="Caption 1">
+                    <button onclick="music_update(1)">Update</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <audio controls>
+                    <source src="https://example.com/audio1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <div class="caption-container">
+                    <input type="text" id="caption1" value="Caption 1">
+                    <button onclick="sound_update(1)">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function story_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+        
+        function picture_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+
+        function music_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+
+        function sound_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+    </script>
+</body>
+</html>

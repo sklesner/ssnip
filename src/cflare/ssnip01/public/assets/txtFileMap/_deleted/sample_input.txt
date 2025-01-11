@@ -1,0 +1,70 @@
+<plan>
+1. Introduce Sally, a young girl who dreams of becoming a famous singer
+2. Sally finds a magic gem that enhances her voice
+3. Sally practices singing, but also develops a habit of drinking too much cocoa
+4. Sally meets an old wise woman who warns her about her habits
+5. Sally performs at a big contest in the city
+6. Sally's excessive cocoa habit leads to her failure at the contest
+</plan>
+
+<scene>
+Sally sipped her morning cocoa, gazing out the window. "Oh, how I wish I could be a famous singer!" she sighed.
+
+Her mother chuckled, "Well, dear, wishing won't make it so. You'll need to work hard and practice every day."
+
+Sally frowned. "But that sounds boring! Can't I just become famous overnight?"
+
+Her mother shook her head. "Life doesn't work that way, Sally. Your daily actions shape who you become."
+</scene>
+
+<scene>
+While exploring the attic, Sally stumbled upon a glittering gem. "Wow!" she exclaimed, picking it up.
+
+Suddenly, a tiny fairy appeared. "Hello, Sally! I'm the Gem Guardian. This magical stone can enhance your singing voice, but remember - true talent comes from within."
+
+Sally's eyes widened. "Really? That's amazing! With this, I'll become a star in no time!"
+
+The fairy warned, "Be careful, Sally. Magic can't replace hard work and good habits."
+</scene>
+
+<scene>
+Weeks passed. Sally practiced singing occasionally, but spent more time drinking cocoa and daydreaming about fame.
+
+Her best friend, Tom, noticed the change. "Sally, weren't you going to practice every day?"
+
+Sally shrugged. "Why bother? I have this magic gem now. Listen!" She sang a few notes, her voice unnaturally beautiful.
+
+Tom frowned. "That doesn't sound like you, Sally. And isn't that your third cup of cocoa today?"
+</scene>
+
+<scene>
+One day, Sally met an old woman in the park. "My, what a lovely voice you have," the woman said. "But I sense it's not entirely your own."
+
+Sally blushed. "Well, I have this magic gem..."
+
+The old woman nodded wisely. "Ah, I see. But tell me, child, what do you do each day to nurture your talent?"
+
+Sally hesitated. "I... I drink lots of cocoa?"
+
+The old woman smiled sadly. "Remember, dear, who you become depends on what you do every day, not on magic tricks."
+</scene>
+
+<scene>
+Finally, the day of the big singing contest in the city arrived. Sally stood nervously backstage, clutching her gem.
+
+"You've got this, Sally!" Tom encouraged. "Just remember what that old lady said about daily habits."
+
+Sally laughed. "Oh, Tom, you worry too much. I've got my lucky charm and my cocoa. I'll be fine!"
+
+As she stepped onto the stage, Sally took a big swig from her cocoa thermos, unaware of the trouble brewing within.
+</scene>
+
+<scene>
+The spotlight hit Sally. She opened her mouth to sing, but instead of a beautiful melody, only a croak came out. Her throat was raw from too much cocoa!
+
+"I don't understand," Sally cried later, over a loaf of comforting bread. "The gem was supposed to make me a star!"
+
+Tom patted her shoulder. "Sally, magic can't replace practice and good habits. Maybe it's time to put down the cocoa and pick up some vocal exercises instead?"
+
+Sally nodded, finally understanding. "You're right, Tom. From now on, I'll work on becoming the singer I want to be, one day at a time."
+</scene>

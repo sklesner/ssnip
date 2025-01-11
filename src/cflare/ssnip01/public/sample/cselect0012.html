@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Category Selector</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #2563eb;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+        button {
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+        }
+        button:hover {
+            background-color: #16a34a;
+        }
+        .content {
+            flex-grow: 1;
+            overflow: auto;
+            padding: 1rem;
+        }
+        .category-list, .selected-list {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .category-item {
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 0.5rem;
+        }
+        .selected-item::before {
+            content: "✓";
+            color: #22c55e;
+            margin-right: 0.5rem;
+        }
+        .children {
+            margin-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lesson Category Selector</h1>
+        <button id="doneBtn">DONE</button>
+    </header>
+    <div class="content">
+        <div id="categoryList" class="category-list"></div>
+        <div class="selected-list">
+            <h3>Selected Categories:</h3>
+            <ul id="selectedList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const categories = [
+            {
+                name: 'Mathematics',
+                subcategories: [
+                    {
+                        name: 'Algebra',
+                        subsubcategories: ['Linear Equations', 'Quadratic Equations', 'Polynomials']
+                    },
+                    {
+                        name: 'Geometry',
+                        subsubcategories: ['Shapes', 'Angles', 'Trigonometry']
+                    }
+                ]
+            },
+            {
+                name: 'Science',
+                subcategories: [
+                    {
+                        name: 'Biology',
+                        subsubcategories: ['Cell Structure', 'Genetics', 'Ecology']
+                    },
+                    {
+                        name: 'Chemistry',
+                        subsubcategories: ['Atoms', 'Chemical Reactions', 'Periodic Table']
+                    }
+                ]
+            }
+        ];
+
+        let selectedCategories = {};
+
+        function createCategoryItem(item, path = []) {
+            const div = document.createElement('div');
+            div.className = 'category-item';
+            const currentPath = [...path, item.name];
+            const pathString = currentPath.join('.');
+
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = selectedCategories[pathString] || false;
+            checkbox.addEventListener('change', () => handleToggle(pathString));
+
+            const hasChildren = item.subcategories || item.subsubcategories;
+            if (hasChildren) {
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'toggle-btn';
+                toggleBtn.innerHTML = '▶';
+                toggleBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isExpanded = toggleBtn.innerHTML === '▼';
+                    toggleBtn.innerHTML = isExpanded ? '▶' : '▼';
+                    childrenDiv.style.display = isExpanded ? 'none' : 'block';
+                });
+                div.appendChild(toggleBtn);
+            }
+
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(' ' + item.name));
+            div.appendChild(label);
+
+            if (hasChildren) {
+                const childrenDiv = document.createElement('div');
+                childrenDiv.className = 'children';
+                childrenDiv.style.display = 'none';
+
+                if (item.subcategories) {
+                    item.subcategories.forEach(subcat => {
+                        childrenDiv.appendChild(createCategoryItem(subcat, currentPath));
+                    });
+                }
+
+                if (item.subsubcategories) {
+                    item.subsubcategories.forEach(subsubcat => {
+                        childrenDiv.appendChild(createCategoryItem({ name: subsubcat }, currentPath));
+                    });
+                }
+
+                div.appendChild(childrenDiv);
+            }
+
+            return div;
+        }
+
+        function handleToggle(path) {
+            const isSelected = !selectedCategories[path];
+            selectedCategories[path] = isSelected;
+
+            if (isSelected) {
+                const parts = path.split('.');
+                while (parts.length > 1) {
+                    parts.pop();
+                    const parentPath = parts.join('.');
+                    selectedCategories[parentPath] = true;
+                }
+            }
+
+            Object.keys(selectedCategories).forEach(key => {
+                if (key.startsWith(path + '.')) {
+                    selectedCategories[key] = isSelected;
+                }
+            });
+
+            updateUI();
+        }
+
+        function getLowestLevelSelections() {
+            const selections = Object.entries(selectedCategories)
+                .filter(([_, isSelected]) => isSelected)
+                .map(([path]) => path);
+            
+            return selections.filter(path => 
+                !selections.some(otherPath => 
+                    otherPath !== path && otherPath.startsWith(path + '.')
+                )
+            );
+        }
+
+        function updateUI() {
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = '';
+            categories.forEach(category => {
+                categoryList.appendChild(createCategoryItem(category));
+            });
+
+            const selectedList = document.getElementById('selectedList');
+            selectedList.innerHTML = '';
+            getLowestLevelSelections().forEach(path => {
+                const li = document.createElement('li');
+                li.className = 'selected-item';
+                li.textContent = path.split('.').join(' > ');
+                selectedList.appendChild(li);
+            });
+        }
+
+        document.getElementById('doneBtn').addEventListener('click', () => {
+            const lowestLevelSelections = getLowestLevelSelections();
+            Cookies.set('categories', JSON.stringify(lowestLevelSelections), { expires: 7 });
+            window.location.href = 'https://joe.ackop.com';
+        });
+
+        // Load saved categories on page load
+        const savedCategories = Cookies.get('categories');
+        if (savedCategories) {
+            JSON.parse(savedCategories).forEach(path => {
+                selectedCategories[path] = true;
+            });
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>

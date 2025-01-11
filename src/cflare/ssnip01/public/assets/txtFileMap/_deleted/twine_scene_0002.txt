@@ -1,0 +1,42 @@
+
+<tw-passagedata pid="<pid>" name="<pageName>" tags="" position="225,100" size="100,100">
+&lt;&lt;cacheaudio &quot;bgm_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/aa1a443d.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;sfx_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/246cbccb.mp3&quot;&gt;&gt;
+
+&lt;html&gt;
+    &lt;img src=&quot;https://twine.ackop.com/<storyId>_picture_p<pid>.png&quot;/&gt;
+    &lt;script&gt;
+        defaultImageUrl = &quot;http://aipif-2023.s3.amazonaws.com/static/generating.png&quot;; 
+        images = document.getElementsByTagName(&quot;img&quot;);
+
+        for (let i = 0; i &lt; images.length; i++) {
+            images[i].addEventListener(&quot;error&quot;, function() {
+                this.src = defaultImageUrl;
+            });
+        }
+    &lt;/script&gt;
+&lt;/html&gt;
+
+<sceneText>
+
+&lt;&lt;button [[What happened next?|<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;🔊&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.4 play&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🎵&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🗣️&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.5 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🔇&quot;&gt;&gt; &lt;&lt;masteraudio stop&gt;&gt; &lt;&lt;/button&gt;&gt;
+
+&lt;html&gt;  
+    &lt;a href=&quot;http://aipif-2023.s3.amazonaws.com/story/story_fc6b37f5/p0090-sgallery.html&quot; target=&quot;_blank&quot;&gt;sounds&lt;/a&gt;
+    &lt;a href=&quot;http://www.ufafu.com&quot;&gt;home&lt;/a&gt;
+&lt;/html&gt;
+
+</tw-passagedata>
+            
+            

@@ -1,0 +1,19 @@
+<question>
+Why did Charlie not become a famous inventor like Lila?
+</question>
+
+<answer>
+Charlie did not become a famous inventor because he spent too much time playing video games and eating chocolates instead of working on his inventions every day.
+</answer>
+
+<decoy>
+Charlie did not become a famous inventor because Lila refused to help him with his inventions.
+</decoy>
+
+<decoy>
+Charlie did not become a famous inventor because the town of Spick-and-Span did not support his dreams.
+</decoy>
+
+<decoy>
+Charlie did not become a famous inventor because he did not have access to the workshop that Lila had.
+</decoy>

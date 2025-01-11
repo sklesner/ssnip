@@ -1,0 +1,158 @@
+<tw-passagedata pid="{pid}" name="{pageName}" tags="" position="225,100" size="100,100">    &lt;style&gt;
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .page-container {
+            max-width: 100%;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .passage {
+            line-height: 1.1;
+        }
+        .container {
+            width: 100%;
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 1em;
+            word-wrap: break-word;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .rating &gt; span {
+            width: 160px;
+            margin-right: 10px;
+        }
+        .stars {
+            display: inline-block;
+            direction: rtl;
+            padding-left: 1em;
+        }
+        .stars input[type=&quot;radio&quot;] {
+            display: none;
+        }
+        .stars label {
+            font-size: 1em;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input[type=&quot;radio&quot;]:checked ~ label {
+            color: #ffcc00;
+        }
+        textarea {
+            width: 60%;
+            height: 100px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            border-radius: 4px;
+            min-width: 0em;
+        }
+        .submit-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .submit-container input {
+            background-color: #4a4a4a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-container input:hover {
+            background-color: #5a5a5a;
+        }
+        .thank-you {
+            text-align: center;
+            margin-top: 15px;
+            font-style: italic;
+            color: #aaa;
+        }
+        .another-story {
+            display: block;
+            width: 200px;
+            margin: 20px auto 0;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .another-story:hover {
+            background-color: #2980b9;
+        }
+    &lt;/style&gt;
+    &lt;div class=&quot;page-container&quot;&gt;&lt;!--
+            --&gt;{messageText}&lt;!--
+            --&gt;&lt;div class=&quot;container&quot;&gt;
+            &lt;h1&gt;Did you like it?&lt;/h1&gt;
+            &lt;form id=&quot;feedbackForm&quot;&gt;&lt;div id=&quot;ratingQuestions&quot;&gt;&lt;/div&gt;
+                &lt;textarea name=&quot;comments&quot; id=&quot;comments&quot; placeholder=&quot;Please explain why.&quot;&gt;&lt;/textarea&gt; &lt;!-- &lt;p class=&quot;thank-you&quot;&gt;Thank you for your feedback!&lt;/p&gt; --&gt;
+            &lt;/form&gt; &lt;/div&gt;
+        &lt;!-- 
+           &lt;a href=&quot;{bAction}&quot; class=&quot;another-story&quot;&gt;{bText}&lt;/a&gt;
+           &lt;div style=&quot;text-align: center;&quot;&gt;&lt;&lt;button &quot;{bText}&quot;&gt;&gt;&lt;&lt;script&gt;&gt;window.location.href=&quot;{bAction}&quot;&lt;&lt;/script&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/div&gt;
+        --&gt;
+        &lt;div style=&quot;text-align: center;&quot;&gt;&lt;&lt;button &quot;DONE ▶️&quot;&gt;&gt;&lt;&lt;script&gt;&gt;window.location.href=&quot;{bAction}&quot;&lt;&lt;/script&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        const qquestions = [
+            { id: &apos;quiz&apos;, label: &apos;Quiz&apos; },
+            { id: &apos;story&apos;, label: &apos;Story&apos; },
+            { id: &apos;pictures&apos;, label: &apos;Pictures&apos; }
+        ];
+        function createRatingQuestion(question, index) {
+            const div = document.createElement(&apos;div&apos;);
+            div.className = &apos;rating&apos;;
+            div.innerHTML = `
+                &lt;span id=&quot;${question.id}-label&quot;&gt;${question.label}&lt;/span&gt;
+                &lt;div class=&quot;stars&quot;&gt;
+                    ${[5, 4, 3, 2, 1].map(value =&gt; `
+                        &lt;input type=&quot;radio&quot; id=&quot;star${value}-${index}&quot; name=&quot;${question.id}&quot; value=&quot;${value}&quot; aria-labelledby=&quot;${question.id}-label&quot;&gt;
+                        &lt;label for=&quot;star${value}-${index}&quot;&gt;&amp;#9733;&lt;/label&gt;
+                    `).join(&apos;&apos;)}
+                &lt;/div&gt;
+            `;
+            return div;
+        }
+        const ratingQuestionsContainer = document.getElementById(&apos;ratingQuestions&apos;);
+        qquestions.forEach((question, index) =&gt; {
+            ratingQuestionsContainer.appendChild(createRatingQuestion(question, index));
+        });
+        document.getElementById(&apos;feedbackForm&apos;).addEventListener(&apos;submit&apos;, function(e) {
+            e.preventDefault();
+            const feedback = {};
+            qquestions.forEach(question =&gt; {
+                const rating = document.querySelector(`input[name=&quot;${question.id}&quot;]:checked`);
+                feedback[question.id] = rating ? +rating.value : 0;
+            });
+            feedback.comments = document.getElementById(&apos;comments&apos;).value;
+            const jsonFeedback = JSON.stringify(feedback, null, 2);
+            console.log(jsonFeedback);
+        });
+    &lt;/script&gt;
+</tw-passagedata>

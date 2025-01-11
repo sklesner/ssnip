@@ -1,0 +1,34 @@
+
+
+
+{
+    "story_prompt":"💩🦔🎢🎉🐥😅",
+    "story_plan":"plan your story here",
+    "scene_array": [  
+        {
+            "scene_emoji":"💩",
+            "scene_story": "Archie stood proudly in his kitchen, dusted with flour, ready to create the world's greatest pizza. He piled on everything he loved—strawberries, marshmallows, even pickles—and ignored his friend Milo's warning that perhaps he should reconsider. When the oven dinged, Archie pulled out his masterpiece, only to find it had melted into a gloopy mess that stuck to the pan like glue. Still, he grinned, pretending it was perfect, until the cheese began to bubble over the edges, dripping onto the floor, and set off the fire alarm.",
+            "scene_picture": "A lopsided pizza oozing with strange toppings—melting strawberries, gooey marshmallows, and dripping pickles.",
+            "scene_question": "Why did Archie ignore Milo’s advice when making the pizza?",
+            "answer": "He thought his own ideas were always better, even though Milo had experience making pizzas before.",
+            "decoys": [
+            "He believed Milo was trying to sabotage his pizza-making efforts.",
+            "Archie wanted to make a pizza so unique that it didn't matter what others thought.",
+            "He didn't hear Milo's advice because the kitchen was too noisy."
+            ]
+        },
+        {
+            "scene_emoji":"🦔",
+            "scene_story": "Archie stood proudly in his kitchen, dusted with flour, ready to create the world's greatest pizza. He piled on everything he loved—strawberries, marshmallows, even pickles—and ignored his friend Milo's warning that perhaps he should reconsider. When the oven dinged, Archie pulled out his masterpiece, only to find it had melted into a gloopy mess that stuck to the pan like glue. Still, he grinned, pretending it was perfect, until the cheese began to bubble over the edges, dripping onto the floor, and set off the fire alarm.",
+            "scene_picture": "A lopsided pizza oozing with strange toppings—melting strawberries, gooey marshmallows, and dripping pickles.",
+            "scene_question": "Why did Archie ignore Milo’s advice when making the pizza?",
+            "answer": "He thought his own ideas were always better, even though Milo had experience making pizzas before.",
+            "decoys": [
+            "He believed Milo was trying to sabotage his pizza-making efforts.",
+            "Archie wanted to make a pizza so unique that it didn't matter what others thought.",
+            "He didn't hear Milo's advice because the kitchen was too noisy."
+            ]
+        }
+    ]
+}
+

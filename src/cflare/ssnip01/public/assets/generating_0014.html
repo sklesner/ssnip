@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Animated Emoji Display with Loading Text</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: 'Comic Neue', cursive;
+        }
+        #container {
+            text-align: center;
+        }
+        #loading-text {
+            font-size: 30px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+            /* transition: opacity 0.5s ease; */
+        }
+        #emoji-container {
+            font-size: 80px;
+            width: 800px;
+            height: 120px;
+        }
+        .emoji {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #reloadButton {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -100px;
+            transition: top 0.5s ease-out;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #404040;
+            border: 3px solid #606060;
+            border-radius: 8px;
+            box-shadow: 0 6px 0 #404040, 0 12px 16px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.1s ease-out;
+        }
+        #reloadButton:hover {
+            background-color: #dae5ff;
+        }
+        #reloadButton:active {
+            box-shadow: 0 3px 0 #404040, 0 6px 8px rgba(0,0,0,0.3);
+            transform: translateX(-50%) translateY(3px);
+        }
+    </style>
+</head>
+<body>
+    <button id="reloadButton" onclick="location.reload()">Press to retry</button>
+    <div id="container">
+        <div id="emoji-container"></div>
+        <div id="loading-text"></div>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        function emojiArray(emojiString) {
+            return emojiString.split('-');
+        }
+
+        const emojiString = '<emojiTxt>'
+        // const emojiString = '💩🦔🎢🎉🐥😅';
+        const emojis = emojiArray(emojiString);
+        const container = document.getElementById('emoji-container');
+        const loadingTextElement = document.getElementById('loading-text');
+        let currentIndex = 0;
+
+        const loadingTexts = [
+            "Brewing narrative essence...",
+            "Calibrating plot crystals...",
+            "Questing for quirky quips...",
+            "Weaving narrative threads...",
+            "Unfurling the scrolls of fate...",
+            "Divining character fates...",
+            "Unlocking the vault of verses...",
+            "Alchemizing story elements...",
+            // "Reticulating plot splines...",
+            "Polishing plot pebbles...",
+            "Herding whimsical words...",
+            "Inflating imagination balloons...",
+            "Tuning tale trumpets...",
+            "Juggling jocular jargon...",
+            "Summoning silly syllables...",
+            "Brewing backstory broth...",
+            "Untangling yarn yarns...",
+            "Dusting off dusty tomes...",
+            "Wrangling wayward witticisms...",
+            "Coaxing coy characters...",
+            "Stirring the story stew...",
+            "Unraveling narrative knots...",
+            "Popping plot kernels...",
+            "Sifting through silly seeds...",
+            "Bottling bottled brilliance...",
+            "Folding figment origami...",
+            "Watering wordplay saplings...",
+            "Assembling anecdote atoms...",
+            // "Knitting nonsense narratives...",
+            "Harvesting hilarity hay...",
+            "Sculpting sentence castles...",
+            "Inflating idea balloons...",
+            "Dueling with dangling plotlines..."
+        ];
+
+        let currentLoadingTextIndex = -1;
+
+        function getNextRandomLoadingText() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * loadingTexts.length);
+            } while (nextIndex === currentLoadingTextIndex);
+
+            currentLoadingTextIndex = nextIndex;
+            return loadingTexts[currentLoadingTextIndex];
+        }
+
+        function fadeInLoadingText() {
+            loadingTextElement.style.opacity = '1';
+        }
+
+        function fadeOutLoadingText() {
+            loadingTextElement.style.opacity = '0';
+        }
+
+        // Set initial loading text
+        loadingTextElement.textContent = getNextRandomLoadingText();
+        fadeInLoadingText();
+
+        // Create emoji elements
+        emojis.forEach(emoji => {
+            const span = document.createElement('span');
+            span.textContent = emoji;
+            span.className = 'emoji';
+            container.appendChild(span);
+        });
+
+        const emojiElements = container.getElementsByClassName('emoji');
+
+        function checkAndRedirect() {
+            const emojiString = '<emojiTxt>'
+            const t_url = 'https://twine.ackop.com/' + emojiString + '.html'
+            const p_url = 'https://twine.ackop.com/<storyId>_picture_p2.png' // does not work due to CORS
+            // ERROR: Access to fetch at 'https://twine.ackop.com/72_picture_p2.png' from origin 'https://joe.ackop.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+
+            fetch(t_url, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = t_url;
+                        console.error('Destination URL is accessible');
+                    } else {
+                        console.error('Destination URL is not accessible');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking destination URL:', error);
+                });
+        }
+
+        var startTime = Date.now();
+
+        function updateEmoji() {
+            if (currentIndex <= emojis.length) {
+                for (let i = 0; i < currentIndex; i++) {
+                    emojiElements[i].style.opacity = '1';
+                }
+                currentIndex++;
+            } else {
+                for (let i = 0; i < emojiElements.length; i++) {
+                    emojiElements[i].style.opacity = '0';
+                }
+                currentIndex = 0;
+                // Change loading text when a full cycle is complete
+                fadeOutLoadingText();
+                setTimeout(() => {
+                    loadingTextElement.textContent = getNextRandomLoadingText();
+                    fadeInLoadingText();
+                }, 500);
+            }
+
+            const currentTime = Date.now();
+            if (currentTime - startTime >= 5000) {
+                checkAndRedirect();
+                startTime = currentTime;
+            }
+
+            setTimeout(updateEmoji, 500);
+        }
+
+        checkAndRedirect();
+        setTimeout(function() {
+            document.getElementById('reloadButton').style.top = '30px';
+        }, 40*1000);
+        updateEmoji();
+    </script>
+</body>
+</html>

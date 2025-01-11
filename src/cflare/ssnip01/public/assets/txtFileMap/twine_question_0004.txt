@@ -1,0 +1,100 @@
+
+<tw-passagedata pid="<pid>" name="<pageName>" tags="" position="225,100" size="100,100">&lt;&lt;cacheaudio &quot;bgm_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/aa1a443d.mp3&quot;&gt;&gt;&lt;&lt;cacheaudio &quot;sfx_r&quot; &quot;mp3|http://aipif-2023.s3.amazonaws.com/_asset/246cbccb.mp3&quot;&gt;&gt;
+&lt;&lt;if $firstQuestion&gt;&gt;
+    Welcome to the Quiz
+&lt;&lt;elseif $retry&gt;&gt;
+Try again! So far $correctCount ✔️ and $incorrectCount ❌
+&lt;&lt;else&gt;&gt;
+Good answer! So far $correctCount ✔️ and $incorrectCount ❌
+&lt;&lt;/if&gt;&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;style&gt;
+   .emoji { font-size: 35vw; line-height: 1; cursor: pointer; user-select: none; display: flex; justify-content: center; align-items: center;}
+   .full-width-image { max-width: 100%; height: auto; cursor: pointer; }
+   .container<pid> { display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh; }
+   .centered-buttons {text-align: center;}
+  &lt;/style&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;div id=&quot;container<pid>&quot;&gt;
+   &lt;span class=&quot;emoji&quot; onclick=&quot;toggleContent()&quot;&gt;<emoji>&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+   container<pid> = document.getElementById(&quot;container<pid>&quot;);
+   emoji<pid> = &quot;<emoji>&quot;;
+   targetImageUrl = &quot;https://twine.ackop.com/<storyId>_picture_p<picId>.png&quot;;
+   defaultImageUrl = &quot;https://joe.ackop.com/assets/img/generating.png&quot;;
+   isEmoji = true;
+   lastAttemptTime = 0;
+   targetImageUrl2=&quot;&quot;;
+
+   function toggleContent() {
+     if (isEmoji) {
+       img = document.createElement(&quot;img&quot;);
+       img.src = targetImageUrl2 == &quot;&quot; ? targetImageUrl : targetImageUrl2;
+       img.className = &quot;full-width-image&quot;;
+       img.onclick = toggleContent;
+       img.onerror = handleImageError;
+       container<pid>.innerHTML = &quot;&quot;;
+       container<pid>.appendChild(img);
+     } else {
+       container<pid>.innerHTML = `&lt;span class=&quot;emoji&quot; onclick=&quot;toggleContent()&quot;&gt;${emoji<pid>}&lt;/span&gt;`;
+     }
+     isEmoji = !isEmoji;
+   }
+
+   function handleImageError() {
+     const currentTime = Date.now();
+     if (currentTime - lastAttemptTime &gt;= 5000) {
+       this.src = targetImageUrl + &quot;?v=&quot; + currentTime;
+       targetImageUrl2 = this.src;
+       lastAttemptTime = currentTime;
+     }
+   }
+  &lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;<questionText>
+
+&lt;div class=&quot;centered-buttons&quot;&gt;
+&lt;&lt;button &quot;<b1Text>&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+<b1Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b2Text>&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+<b2Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b3Text>&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+<b3Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;<b4Text>&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+<b4Logic>
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &quot;🔊&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.4 play&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🎵&quot; &gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; loop volume 0.02 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🗣️&quot; &gt;&gt;
+&lt;&lt;audio &quot;sfx_r&quot; volume 0.5 play&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🔇&quot;&gt;&gt; &lt;&lt;masteraudio stop&gt;&gt; &lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button [[◀️|<prevPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button &quot;🏠&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;window.location.href=&quot;https://joe.ackop.com/&quot;&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;&lt;&lt;button [[▶️|<nextPageName>]]&gt;&gt;
+&lt;&lt;audio &quot;bgm_r&quot; stop&gt;&gt;
+&lt;&lt;/button&gt;&gt; 
+&lt;/div&gt;
+
+</tw-passagedata>
+            
+            

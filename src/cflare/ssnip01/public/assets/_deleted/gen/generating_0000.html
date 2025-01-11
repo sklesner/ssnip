@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Animated Emoji Display</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #emoji-container {
+            font-size: 80px;
+            text-align: center;
+            width: 800px; /* Adjust based on your needs */
+            height: 120px; /* Adjust based on your needs */
+        }
+        .emoji {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="emoji-container"></div>
+
+    <script>
+
+        function emojiArray(emojiString) {
+            return Array.from(emojiString);
+        }
+
+        // const emojiString = '<emojiTxt>'
+        const emojiString = '💩🦔🎢🎉🐥😅'
+        // const emojiString = '💩🦔🎢🎉🐥😅'
+        const emoji = emojiArray(emojiString);
+        // const emojis = ['💩', '🦔', '🎢', '🎉', '🐥', '😅'];
+        const container = document.getElementById('emoji-container');
+        let currentIndex = 0;
+
+        // Create emoji elements
+        emojis.forEach(emoji => {
+            const span = document.createElement('span');
+            span.textContent = emoji;
+            span.className = 'emoji';
+            container.appendChild(span);
+        });
+
+        const emojiElements = container.getElementsByClassName('emoji');
+
+        function updateEmoji() {
+            if (currentIndex <= emojis.length) {
+                for (let i = 0; i < currentIndex; i++) {
+                    emojiElements[i].style.opacity = '1';
+                }
+                currentIndex++;
+            } else {
+                for (let i = 0; i < emojiElements.length; i++) {
+                    emojiElements[i].style.opacity = '0';
+                }
+                currentIndex = 0;
+            }
+            setTimeout(updateEmoji, 500);
+        }
+
+        updateEmoji();
+    </script>
+</body>
+</html>

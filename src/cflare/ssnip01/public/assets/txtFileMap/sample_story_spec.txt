@@ -1,0 +1,78 @@
+{
+    "story_prompt": "🍕 🐧 🍹 🐿️ 🎲 🍌",
+    "story_plan": "A young penguin named Percy loves to make food and share it with others, but he's afraid to ask for feedback. Through a series of whimsical experiences with his friends and some unexpected situations, Percy learns the importance of seeking honest feedback. Each scene presents a small challenge or misunderstanding that leads Percy closer to realizing the value of asking others for their thoughts. Along the way, he encounters playful characters and curious moments, all leading to a final realization.",
+    "scene_array": [
+        {
+            "scene_emoji": "🍕",
+            "scene_story": "Percy the penguin made his first-ever pizza. It smelled delicious, but when he offered it to his friends, they all smiled politely and said it looked nice. Percy smiled back, but he noticed that nobody actually took a bite.",
+            "scene_picture": "A large pizza with uneven toppings and a crust that is a little too burnt on one side.",
+            "scene_question": "Why do you think Percy's friends didn't eat the pizza?",
+            "correct_answer": "They might not have liked how it tasted but didn’t want to hurt Percy’s feelings.",
+            "decoy_answer_array": [
+                "They were not hungry.",
+                "They were too shy to try it.",
+                "They didn’t know what pizza was."
+            ]
+        },
+        {
+            "scene_emoji": "🐧",
+            "scene_story": "Percy decided to make a second pizza, but this time he wanted to ask someone for advice. He waddled over to his friend Petunia, a wise penguin who had cooked many meals before. Petunia tried a slice but didn't say anything until Percy asked for her thoughts. 'It's good,' she said, 'but maybe next time, a little less salt!'",
+            "scene_picture": "A tall penguin wearing a tiny apron and a thoughtful look on her face as she takes a small bite of pizza.",
+            "scene_question": "Why did Percy finally ask Petunia for her opinion?",
+            "correct_answer": "He wanted to improve his cooking and needed honest advice.",
+            "decoy_answer_array": [
+                "He wanted to show off his pizza again.",
+                "He thought Petunia was hungry.",
+                "He wasn’t sure if the pizza was cooked properly."
+            ]
+        },
+        {
+            "scene_emoji": "🍹",
+            "scene_story": "Feeling more confident, Percy decided to make a new recipe: a fruity smoothie. His friend Sally the seal happily slurped it up, but Percy noticed her nose wrinkling slightly. When he asked if she liked it, she hesitated before saying, 'Maybe just a bit too much banana.'",
+            "scene_picture": "A bright smoothie cup with a colorful straw, with a slice of banana hanging off the edge.",
+            "scene_question": "Why do you think Sally wrinkled her nose while drinking the smoothie?",
+            "correct_answer": "Because there was too much banana in it for her taste.",
+            "decoy_answer_array": [
+                "Because she was allergic to bananas.",
+                "Because she drank it too quickly.",
+                "Because she didn't like smoothies at all."
+            ]
+        },
+        {
+            "scene_emoji": "🐿️",
+            "scene_story": "Next, Percy decided to get creative with a batch of cookies. He spotted a squirrel in the park and offered one. The squirrel nibbled it thoughtfully and said, 'These are good, but they could use a bit more crunch.' Percy felt grateful for the honesty and wrote down the suggestion.",
+            "scene_picture": "A small, happy squirrel holding a cookie in its paws, with a thoughtful expression as it munches.",
+            "scene_question": "What did the squirrel suggest Percy do to improve his cookies?",
+            "correct_answer": "Make them crunchier.",
+            "decoy_answer_array": [
+                "Add more chocolate chips.",
+                "Make them softer.",
+                "Add more sugar."
+            ]
+        },
+        {
+            "scene_emoji": "🎲",
+            "scene_story": "One day, Percy decided to throw a game night and served his famous pizza and cookies. His friends played games, but this time, instead of just smiling, they offered him friendly feedback as they ate. Some liked the pizza but thought the crust could be crispier, while others loved the cookies but suggested adding some spices. Percy listened carefully and took notes.",
+            "scene_picture": "A table filled with colorful board games, surrounded by plates of pizza and cookies with pieces of paper scattered around.",
+            "scene_question": "Why were Percy's friends giving him feedback this time?",
+            "correct_answer": "Because Percy asked for it and they knew he wanted to improve his cooking.",
+            "decoy_answer_array": [
+                "Because they didn’t like anything.",
+                "Because the food was too cold.",
+                "Because they wanted to be critical."
+            ]
+        },
+        {
+            "scene_emoji": "🍌",
+            "scene_story": "After making all the adjustments his friends had suggested, Percy invited everyone back for one final feast. This time, his pizza had the perfect crust, the cookies were just the right crunchiness, and the smoothie had the perfect amount of banana. Everyone cheered! Percy felt proud, knowing that their feedback had helped him create something truly delicious.",
+            "scene_picture": "A table full of happy animals clapping their flippers and paws, with delicious food laid out in front of them.",
+            "scene_question": "How did Percy’s cooking improve by the end of the story?",
+            "correct_answer": "He listened to his friends’ feedback and made his recipes better.",
+            "decoy_answer_array": [
+                "He practiced by himself a lot.",
+                "He found a secret ingredient.",
+                "He watched cooking shows to get better."
+            ]
+        }
+    ]
+}

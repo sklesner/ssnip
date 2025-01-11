@@ -1,0 +1,15 @@
+
+<tw-passagedata pid="<pid>" name="<pageName>" tags="" position="225,100" size="100,100">
+
+<messageText>
+
+&lt;&lt;button [[<bText>|<bAction>]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+
+&lt;html&gt;  
+    &lt;a href=&quot;http://aipif-2023.s3.amazonaws.com/story/story_fc6b37f5/p0090-sgallery.html&quot; target=&quot;_blank&quot;&gt;sounds&lt;/a&gt;
+    &lt;a href=&quot;http://www.ufafu.com&quot;&gt;home&lt;/a&gt;
+&lt;/html&gt;
+
+</tw-passagedata>
+            
+            

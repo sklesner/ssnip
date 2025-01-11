@@ -1,0 +1,26 @@
+    </div>
+
+    <script>
+        
+        function story_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+        
+        function picture_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+
+        function music_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+
+        function sound_update(index) {
+            const caption = document.getElementById(`caption${index}`).value;
+            alert(`Caption ${index} updated to: ${caption}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+&lt;&lt;set $retry to false&gt;&gt; &lt;&lt;set $firstQuestion to false&gt;&gt; &lt;&lt;set $correctCount to $correctCount + 1&gt;&gt; &lt;&lt;goto &quot;{nextPage}&quot;&gt;&gt;
