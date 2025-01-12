@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar with Draggable Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .calendar {
+            flex: 2;
+        }
+        .list-container {
+            flex: 1;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #ddd;
+            border: 1px solid #ddd;
+        }
+        .calendar-cell {
+            background-color: white;
+            padding: 10px;
+            min-height: 80px;
+        }
+        .calendar-cell.dragover {
+            background-color: #e8f4ff;
+            border: 2px dashed #4a9eff;
+        }
+        .calendar-weekday {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .date-number {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .event {
+            background-color: #e3f2fd;
+            padding: 2px 24px 2px 5px;
+            margin: 2px 0;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: move;
+            user-select: none;
+            transition: all 0.1s;
+            position: relative;
+        }
+        .event .delete-btn {
+            position: absolute;
+            right: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        .event:hover .delete-btn {
+            opacity: 1;
+        }
+        .event.editing {
+            cursor: text;
+            background-color: white;
+            border: 1px solid #4a9eff;
+            padding: 1px 4px;
+        }
+        .event input {
+            border: none;
+            background: transparent;
+            width: calc(100% - 20px);
+            font-size: 12px;
+            font-family: inherit;
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+        .event:hover {
+            background-color: #bbdefb;
+        }
+        .event.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .other-month {
+            color: #999;
+        }
+        .item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .item input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .item button {
+            padding: 5px 10px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .add-button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calendar">
+            <div class="calendar-header">
+                <button onclick="previousMonth()">&lt; Previous</button>
+                <h2 id="currentMonthYear"></h2>
+                <button onclick="nextMonth()">Next &gt;</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be generated here -->
+            </div>
+        </div>
+        <div class="list-container">
+            <h2>Events</h2>
+            <div id="list"></div>
+            <button class="add-button" onclick="addItem()">Add New Event</button>
+        </div>
+    </div>
+
+    <script>
+        // Shared events data
+        let events = [
+            {
+                name: "CS256: Quiz 1",
+                date: "2025-01-16"
+            },
+            {
+                name: "CS257: Assignment 2",
+                date: "2025-01-20"
+            }
+        ];
+
+        let currentDate = new Date();
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let draggedEventIndex = null;
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Add weekday headers
+            weekdays.forEach(day => {
+                const weekdayCell = document.createElement('div');
+                weekdayCell.className = 'calendar-weekday';
+                weekdayCell.textContent = day;
+                grid.appendChild(weekdayCell);
+            });
+
+            // Get first day of month and total days
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            
+            // Get previous month's trailing days
+            const previousMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            let previousMonthDays = firstDay.getDay();
+            
+            // Update header
+            document.getElementById('currentMonthYear').textContent = 
+                firstDay.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+            // Add previous month's trailing days
+            for (let i = previousMonthDays - 1; i >= 0; i--) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell other-month';
+                const day = previousMonthLastDay.getDate() - i;
+                cell.innerHTML = `<div class="date-number">${day}</div>`;
+                setupDropZone(cell, null); // Disable drops on other month days
+                grid.appendChild(cell);
+            }
+
+            // Add current month's days
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell';
+                cell.innerHTML = `<div class="date-number">${day}</div>`;
+
+                // Create the date string for this cell
+                const currentDateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEvents = events.filter(event => event.date === currentDateStr);
+                
+                dayEvents.forEach((event, eventIndex) => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'event';
+                    eventDiv.draggable = true;
+                    
+                    // Create text content span
+                    const textSpan = document.createElement('span');
+                    textSpan.textContent = event.name;
+                    eventDiv.appendChild(textSpan);
+                    
+                    // Create delete button
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.innerHTML = '×';
+                    deleteBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        deleteItem(events.indexOf(event));
+                    };
+                    eventDiv.appendChild(deleteBtn);
+                    
+                    // Setup drag events
+                    eventDiv.addEventListener('dragstart', (e) => {
+                        if (!e.target.closest('input')) {
+                            draggedEventIndex = events.indexOf(event);
+                            eventDiv.classList.add('dragging');
+                        }
+                    });
+                    
+                    eventDiv.addEventListener('dragend', () => {
+                        eventDiv.classList.remove('dragging');
+                        draggedEventIndex = null;
+                    });
+                    
+                    // Setup double-click to edit
+                    eventDiv.addEventListener('dblclick', (e) => {
+                        if (e.target.tagName !== 'INPUT') {
+                            eventDiv.classList.add('editing');
+                            const input = document.createElement('input');
+                            input.value = event.name;
+                            input.draggable = false;
+                            
+                            // Replace text with input
+                            textSpan.style.display = 'none';
+                            eventDiv.insertBefore(input, textSpan);
+                            input.focus();
+                            
+                            // Handle input events
+                            input.addEventListener('blur', finishEditing);
+                            input.addEventListener('keydown', (e) => {
+                                if (e.key === 'Enter') {
+                                    finishEditing();
+                                } else if (e.key === 'Escape') {
+                                    input.value = event.name;
+                                    finishEditing();
+                                }
+                            });
+                            
+                            function finishEditing() {
+                                if (input.value.trim() !== '') {
+                                    updateItem(events.indexOf(event), 'name', input.value);
+                                }
+                                eventDiv.classList.remove('editing');
+                                textSpan.style.display = '';
+                                input.remove();
+                            }
+                        }
+                    });
+                    
+                    cell.appendChild(eventDiv);
+                });
+
+                // Setup drop zone for this cell
+                setupDropZone(cell, currentDateStr);
+                
+                // Setup double-click to add new event
+                cell.addEventListener('dblclick', (e) => {
+                    // Only trigger if clicking the cell background, not an existing event
+                    if (e.target === cell || e.target.classList.contains('date-number')) {
+                        // Create new event
+                        const newEvent = {
+                            name: "New Event",
+                            date: currentDateStr
+                        };
+                        events.push(newEvent);
+                        
+                        // Render calendar to show new event
+                        renderCalendar();
+                        renderList();
+                        
+                        // Find and trigger edit mode on the new event
+                        const allEvents = cell.querySelectorAll('.event');
+                        const newEventElement = allEvents[allEvents.length - 1];
+                        if (newEventElement) {
+                            newEventElement.dispatchEvent(new MouseEvent('dblclick', {
+                                bubbles: true,
+                                cancelable: true
+                            }));
+                        }
+                    }
+                });
+                
+                grid.appendChild(cell);
+            }
+
+            // Add next month's leading days
+            const totalCells = 42; // 6 rows × 7 days
+            const remainingCells = totalCells - (previousMonthDays + lastDay.getDate());
+            for (let day = 1; day <= remainingCells; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'calendar-cell other-month';
+                cell.innerHTML = `<div class="date-number">${day}</div>`;
+                setupDropZone(cell, null); // Disable drops on other month days
+                grid.appendChild(cell);
+            }
+        }
+
+        function setupDropZone(cell, dateStr) {
+            if (!dateStr) {
+                return; // Don't setup drop zones for other month days
+            }
+
+            cell.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                cell.classList.add('dragover');
+            });
+
+            cell.addEventListener('dragleave', () => {
+                cell.classList.remove('dragover');
+            });
+
+            cell.addEventListener('drop', (e) => {
+                e.preventDefault();
+                cell.classList.remove('dragover');
+                
+                if (draggedEventIndex !== null) {
+                    events[draggedEventIndex].date = dateStr;
+                    renderCalendar();
+                    renderList();
+                }
+            });
+        }
+
+        function renderList() {
+            const listElement = document.getElementById('list');
+            listElement.innerHTML = '';
+            
+            events.forEach((event, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item';
+                
+                // Name input
+                const nameInput = document.createElement('input');
+                nameInput.value = event.name;
+                nameInput.onchange = (e) => updateItem(index, 'name', e.target.value);
+                
+                // Date input
+                const dateInput = document.createElement('input');
+                dateInput.type = 'date';
+                dateInput.value = event.date;
+                dateInput.onchange = (e) => updateItem(index, 'date', e.target.value);
+                
+                // Delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteItem(index);
+                
+                itemDiv.appendChild(nameInput);
+                itemDiv.appendChild(dateInput);
+                itemDiv.appendChild(deleteButton);
+                listElement.appendChild(itemDiv);
+            });
+        }
+
+        function updateItem(index, field, value) {
+            events[index][field] = value;
+            renderCalendar();
+            renderList();
+        }
+
+        function deleteItem(index) {
+            events.splice(index, 1);
+            renderCalendar();
+            renderList();
+        }
+
+        function addItem() {
+            events.push({
+                name: "New Event",
+                date: new Date().toISOString().split('T')[0]
+            });
+            renderCalendar();
+            renderList();
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        // Initial render
+        renderCalendar();
+        renderList();
+    </script>
+</body>
+</html>

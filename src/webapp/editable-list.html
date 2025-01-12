@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable JSON List</title>
+    <style>
+        .list-container {
+            max-width: 600px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        .item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .item input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .item button {
+            padding: 5px 10px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .add-button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="list-container">
+        <div id="list"></div>
+        <button class="add-button" onclick="addItem()">Add New Item</button>
+    </div>
+
+    <script>
+        // Sample JSON data
+        let data = [
+            {
+                "name": "CS256: Quiz 1",
+                "date": "2025-01-16"
+            },
+            {
+                "name": "CS257: Assignment 2",
+                "date": "2025-01-20"
+            }
+        ];
+
+        // Function to render the list
+        function renderList() {
+            const listElement = document.getElementById('list');
+            listElement.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item';
+                
+                // Name input
+                const nameInput = document.createElement('input');
+                nameInput.value = item.name;
+                nameInput.onchange = (e) => updateItem(index, 'name', e.target.value);
+                
+                // Date input
+                const dateInput = document.createElement('input');
+                dateInput.type = 'date';
+                dateInput.value = item.date;
+                dateInput.onchange = (e) => updateItem(index, 'date', e.target.value);
+                
+                // Delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteItem(index);
+                
+                itemDiv.appendChild(nameInput);
+                itemDiv.appendChild(dateInput);
+                itemDiv.appendChild(deleteButton);
+                listElement.appendChild(itemDiv);
+            });
+        }
+
+        // Function to update an item
+        function updateItem(index, field, value) {
+            data[index][field] = value;
+            console.log('Updated data:', data);
+        }
+
+        // Function to delete an item
+        function deleteItem(index) {
+            data.splice(index, 1);
+            renderList();
+            console.log('Updated data:', data);
+        }
+
+        // Function to add a new item
+        function addItem() {
+            data.push({
+                name: "New Item",
+                date: new Date().toISOString().split('T')[0]
+            });
+            renderList();
+            console.log('Updated data:', data);
+        }
+
+        // Initial render
+        renderList();
+    </script>
+</body>
+</html>

@@ -68,6 +68,23 @@
             margin: 10px 0;
             display: none;
         }
+
+        #fileInput, #cameraInput {
+            display: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        #openCamera {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +99,10 @@
         <button id="removeImage">Remove Image</button>
     </div>
 
+    <div class="button-group">
+        <button id="openCamera">Open Camera</button>
+    </div>
+
     <div id="pasteArea">
         <p>Click to upload or paste image here</p>
         <p style="font-size: 0.8em;">(Use Ctrl+V/Command+V to paste, or click to choose a file)</p>
@@ -90,6 +111,7 @@
     <div id="errorMessage" class="error-message"></div>
     <img id="preview" alt="Preview">
     <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment">
     
     <button id="submitBtn" disabled>Submit</button>
 
@@ -110,7 +132,8 @@
         const removeImageBtn = document.getElementById('removeImage');
         const fileInput = document.getElementById('fileInput');
         const errorMessage = document.getElementById('errorMessage');
-        
+        const openCameraBtn = document.getElementById('openCamera');
+        const cameraInput = document.getElementById('cameraInput');
 
         // Image validation constants
         const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
@@ -188,6 +211,32 @@
                 } catch (error) {
                     showError(error.message);
                     fileInput.value = ''; // Clear the input
+                }
+            }
+        });
+
+        // Add camera access functionality
+        openCameraBtn.addEventListener('click', function() {
+            // Check if the device has camera support
+            console.log('Camera access is not supported on this device');
+
+            if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
+                cameraInput.click();
+            } else {
+                showError('Camera access is not supported on this device');
+                console.log('Camera access is not supported on this device');
+            }
+        });
+
+        // Handle camera input
+        cameraInput.addEventListener('change', async function(e) {
+            if (e.target.files && e.target.files[0]) {
+                try {
+                    await validateImage(e.target.files[0]);
+                    handleImageFile(e.target.files[0]);
+                } catch (error) {
+                    showError(error.message);
+                    cameraInput.value = ''; // Clear the input
                 }
             }
         });
