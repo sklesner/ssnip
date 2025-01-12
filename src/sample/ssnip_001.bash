@@ -1,4 +1,4 @@
-curl https://ssnip.ranue.com/api/s010/d0014 \
+curl https://snipdue.tech/api/s010/d0014 \
   -H "content-type: application/json" \
   -d @- << EOF 
 {
@@ -9,7 +9,7 @@ curl https://ssnip.ranue.com/api/s010/d0014 \
 EOF
 
 
-curl https://ssnip.ranue.com/api/s010/d0012 \
+curl https://snipdue.tech/api/s010/d0012 \
   -H "content-type: application/json" \
   -d @- << EOF 
 {
@@ -22,7 +22,7 @@ EOF
 
 
 
-curl https://ssnip.ranue.com/api/s010/d0011 \
+curl https://snipdue.tech/api/s010/d0011 \
   -H "content-type: application/json" \
   -d @- << EOF 
 {
@@ -35,7 +35,7 @@ EOF
 
 
 
-curl https://ssnip.ranue.com/api/s010/d0011 \
+curl https://snipdue.tech/api/s010/d0011 \
   -H "content-type: application/json" \
   -d @- << EOF 
 {

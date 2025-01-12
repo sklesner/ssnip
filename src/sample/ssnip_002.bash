@@ -1,4 +1,4 @@
-curl https://ssnip.ranue.com/api/s010/d0014   -H "content-type: application/json"   -d @- << EOF
+curl https://snipdue.tech/api/s010/d0014   -H "content-type: application/json"   -d @- << EOF
 {
   "start_date": "2025-01-06",
   "media_type": "image/png",
