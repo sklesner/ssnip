@@ -815,7 +815,7 @@
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
                 </svg> -->
-                Import✨
+                ✨Import✨
             </button>
             <div id="list"></div>
             <div class="add-delete-container">
@@ -1400,7 +1400,7 @@
             
             if (file && file.type.startsWith('image/')) {
                 try {
-                    // await validateImage(file);
+                    await validateImage(file);
                     handleImageFile(file);
                 } catch (error) {
                     showError(error.message);
@@ -1463,7 +1463,7 @@
                 if (item.type.indexOf('image') !== -1) {
                     const file = item.getAsFile();
                     try {
-                        // await validateImage(file);
+                        await validateImage(file);
                         handleImageFile(file);
                     } catch (error) {
                         showError(error.message);
@@ -1476,7 +1476,7 @@
         fileInput.addEventListener('change', async function(e) {
             if (e.target.files && e.target.files[0]) {
                 try {
-                    // await validateImage(e.target.files[0]);
+                    await validateImage(e.target.files[0]);
                     handleImageFile(e.target.files[0]);
                 } catch (error) {
                     showError(error.message);
