@@ -12,6 +12,9 @@ npx wrangler pages deployment list --project-name ssnip01
 
 npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
+
+
+
 bash ptwee_expand.bash | npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
 # run js locally 
