@@ -25,8 +25,8 @@ export async function onRequest(context) {
     "env": env,
     "request": request,
     
-    "smart_llm":gLLM,
-    // "smart_llm":cLLM,
+    // "smart_llm":gLLM,
+    "smart_llm":cLLM,
     // "smart_llm":qLLM,
 
     // "sender": pSENDER,
