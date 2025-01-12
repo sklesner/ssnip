@@ -10,9 +10,9 @@ compatibility_date = "2024-07-25"
 # compatibility_flags = ["streams_enable_constructors"]
 
 r2_buckets  = [
-  { binding = "STORY_BUCKET", bucket_name = "aipif-story"},
-  { binding = "TWINE_BUCKET", bucket_name = "aipif-twine"},
-  { binding = "QUIZ_BUCKET", bucket_name = "aipif-quiz"}
+  { binding = "STORY_BUCKET", bucket_name = "ssdata"},
+  { binding = "TWINE_BUCKET", bucket_name = "ssdata"},
+  { binding = "QUIZ_BUCKET", bucket_name = "ssdata"}
 ]
 
 
@@ -48,7 +48,7 @@ r2_buckets  = [
 # OPENAI_API_KEY
 SUPABASE_URL = "https://alnwjxwydnheyaikzgmv.supabase.co"
 # SUPABASE_ANON_KEY = "your-supabase-anon-key"
-CLOUDFLARE_ZONE_ID="a065b36e6155d489d838fc5ff331bf8d"
+CLOUDFLARE_ZONE_ID="1df7e37072aa64ff28abc91d7838b53f"
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai

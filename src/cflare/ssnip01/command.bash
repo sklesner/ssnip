@@ -1,20 +1,18 @@
 # install dependencies
 
-npm install @supabase/supabase-js
-
 # list deployments
 
-npx wrangler pages deployment list --project-name aipif0025
+npx wrangler pages deployment list --project-name ssnip01
 
 
 # deploy
-#npx wrangler pages deploy public --project-name aipif0025 --commit-dirty=true
+#npx wrangler pages deploy public --project-name ssnip01 --commit-dirty=true
 
-# npx wrangler pages deploy && ( ( sleep 5 ; curl https://joe.ackop.com/api/animal12 ) & npx wrangler pages deployment tail --project-name aipif0025  )
+# npx wrangler pages deploy && ( ( sleep 5 ; curl https://joe.ackop.com/api/animal12 ) & npx wrangler pages deployment tail --project-name ssnip01  )
 
-npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name aipif0025
+npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
-bash ptwee_expand.bash | npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name aipif0025
+bash ptwee_expand.bash | npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
 # run js locally 
 (cat functions/api/twine0010.js | perl -pe's{^export }{}g' ; echo "main()" ) | node -
