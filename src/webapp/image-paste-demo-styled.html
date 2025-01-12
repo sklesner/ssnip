@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImageDrop | Modern Image Upload</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
@@ -14,13 +16,15 @@
             --text-light: #6b7280;
             --success: #10b981;
             --error: #ef4444;
+            --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            /* font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; */
+            font-family: var(--font-primary);
         }
 
         body {
@@ -224,8 +228,20 @@
 
         .image-controls {
             display: flex;
+            flex-direction: column;
             gap: 0.5rem;
             margin: 1rem 0;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .preview-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
         }
 
         #fileInput {
@@ -264,25 +280,30 @@
             <button id="removeImage" class="button button-secondary" style="display: none;">
                 Remove Image
             </button>
-        </div>
-
-        <div id="pasteArea">
-            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-            </svg>
-            <p><strong>Drop your image here</strong></p>
-            <!-- <span style="color: var(--text-light);">or click to upload from computer</span> -->
-            <p style="color: var(--text-light);">or paste from clipboard</p> 
-            <div class="format-info">
-                <span>Supported: JPG, PNG, GIF, WebP (Max 5MB)</span>
-            </div>
-        </div>
-
-        <div id="errorMessage" class="error-message"></div>
-        <img id="preview" alt="Preview">
-        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
         
-        <button id="submitBtn" class="button button-primary" disabled>Upload Image</button>
+
+            <div id="pasteArea">
+                <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+                <p><strong>Drop your image here</strong></p>
+                <!-- <span style="color: var(--text-light);">or click to upload from computer</span> -->
+                <p style="color: var(--text-light);">or paste from clipboard</p> 
+                <div class="format-info">
+                    <span>Supported: JPG, PNG, GIF, WebP (Max 5MB)</span>
+                </div>
+            </div>
+        
+
+            <div id="errorMessage" class="error-message"></div>
+            <div class="preview-container">
+                <img id="preview" alt="Preview">
+            </div>
+            
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+            
+            <button id="submitBtn" class="button button-primary" disabled>Upload Image</button>
+        </div>
 
         <div id="result">
             <h2>Upload Complete</h2>
@@ -300,6 +321,7 @@
         const resultPrefix = document.getElementById('resultPrefix');
         const resultImage = document.getElementById('resultImage');
         const eventPrefixInput = document.getElementById('eventPrefix');
+        const startDateInput = document.getElementById('startDate');
         const removeImageBtn = document.getElementById('removeImage');
         const fileInput = document.getElementById('fileInput');
         const errorMessage = document.getElementById('errorMessage');
@@ -461,15 +483,16 @@
         });
 
         function updateSubmitButton() {
-            submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim();
+            submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim() || !startDateInput.value;  
         }
 
         eventPrefixInput.addEventListener('input', updateSubmitButton);
+        startDateInput.addEventListener('input', updateSubmitButton);
 
         submitBtn.addEventListener('click', function() {
-            resultPrefix.textContent = eventPrefixInput.value;
-            const startDate = document.getElementById('startDate').value;
-            const formattedDate = new Date(startDate).toLocaleDateString();
+            const [year, month, day] = startDateInput.value.split('-').map(Number);
+            const date = new Date(year, month - 1, day); // month is 0-based in JavaScript
+            const formattedDate = date.toLocaleDateString();
             resultPrefix.innerHTML = `${eventPrefixInput.value}<br>Date: ${formattedDate}`;
             resultImage.src = preview.src;
             result.style.display = 'block';
