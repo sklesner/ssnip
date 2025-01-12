@@ -105,18 +105,26 @@
                 font-size: 0.875rem;
             }
 
-            .import-button {
-                width: 100%;
+            /* .import-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 24px;
+                font-weight: 500;
+                border: none;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                transition: all 0.2s; */
+
+                /* width: 100%;
                 padding: 0.75rem;
                 background: var(--primary);
                 color: white;
                 border: none;
                 border-radius: 0.5rem;
                 font-weight: 500;
-                margin-bottom: 1rem;
-            }
+                margin-bottom: 1rem; */
+            /* } */
 
-            .add-button {
+            /* .add-button {
                 width: 100%;
                 padding: 0.75rem;
                 background: var(--primary);
@@ -125,7 +133,7 @@
                 border-radius: 0.5rem;
                 font-weight: 500;
                 margin: 1rem 0;
-            }
+            } */
 
             .export-container {
                 display: grid;
@@ -133,6 +141,7 @@
                 gap: 0.75rem;
                 margin-top: 1rem;
             }
+
 
             .export-button {
                 background: var(--success);
@@ -172,15 +181,16 @@
         h1, h2 {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            /* margin-bottom: 1rem; */
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            /* padding: auto; */
         }
 
         .calendar {
             flex: 2;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            /* box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); */
         }
 
         .list-container {
@@ -375,13 +385,30 @@
         .add-button {
             width: 100%;
             padding: 0.75rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--success), #168d1c);
+            /* background: linear-gradient(135deg, var(--primary), var(--primary-dark)); */
+            /* #f442f4, #a10d95 */
             color: white;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+
+            /* width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s; */
         }
 
         .add-button:hover {
@@ -423,6 +450,9 @@
         }
 
         .export-button, .google-calendar-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             padding: 0.75rem;
             color: white;
@@ -432,6 +462,7 @@
             font-weight: 500;
             transition: all 0.2s;
             margin-top: 1rem;
+            
         }
 
         .export-button {
@@ -551,7 +582,8 @@
         .import-button {
             width: 100%;
             padding: 0.75rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--success), #168d1c);
+            /* background: linear-gradient(135deg, var(--primary), var(--primary-dark)); */
             /* #f442f4, #a10d95 */
             color: white;
             border: none;
@@ -571,10 +603,10 @@
             box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
         }
 
-        .import-button svg {
+        /* .import-button svg {
             width: 16px;
             height: 16px;
-        }
+        } */
 
         /* Add all the styles from image-paste-demo-styled.html */
 
@@ -821,7 +853,7 @@
         }
 
         #heading #title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 1000;
             color: white;
         }
@@ -847,17 +879,23 @@
 </head>
 <body>
     <div id="heading">
-        <p id="title">SnipDue</p>
-        <p class="title_subtitle">Turning snapshots into calendar due dates</p>
+        <p id="title">Schedule Snip</p>
+        <p class="title_subtitle">funny tagline</p>
     </div>
     
     <div class="container">
         <div class="calendar">
             <div class="calendar-header">
-                <button onclick="previousMonth()">&lt; Previous</button>
+                <button onclick="previousMonth()">
+                    <i data-lucide="chevron-left" class="button-icon"></i>
+                    Previous
+                </button>
                 <h2 id="currentMonthYear"></h2>
                 <div style="display: flex; gap: 0.5rem;">
-                    <button onclick="nextMonth()">Next &gt;</button>
+                    <button onclick="nextMonth()">
+                        Next 
+                        <i data-lucide="chevron-right" class="button-icon"></i>
+                    </button>
                 </div>
             </div>
             <div class="calendar-grid" id="calendarGrid">
@@ -867,17 +905,16 @@
         <div class="list-container">
             <h2>Events</h2>
             
-            <button class="import-button" onclick="showImportDialog()">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-                </svg> -->
-                <i data-lucide="download" class="button-icon"></i>
-                Import
-            </button>
             
             <div id="list"></div>
             <div class="add-delete-container">
-                
+                <button class="import-button" onclick="showImportDialog()">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                    </svg> -->
+                    <i data-lucide="download" class="button-icon"></i>
+                    Import
+                </button>
                 <button class="add-button" onclick="addItem()">
                     <i data-lucide="calendar-plus" class="button-icon"></i> 
                     Add New Event
@@ -886,14 +923,13 @@
             </div>
 
             <div class="export-container">
-                
                 <button class="export-button" onclick="exportToICS()">
                     <i data-lucide="upload" class="button-icon"></i>
                     Export to iCal
                 </button>
                 <button class="google-calendar-button" onclick="exportToGoogleCalendar()">
                     <i data-lucide="calendar" class="button-icon"></i>
-                    <span>Export to Google Calendar</span>
+                    <span>Google Calendar</span>
                 </button>
             </div>
         </div>
