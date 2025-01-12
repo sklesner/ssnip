@@ -10,8 +10,10 @@ npx wrangler pages deployment list --project-name ssnip01
 
 # npx wrangler pages deploy && ( ( sleep 5 ; curl https://joe.ackop.com/api/animal12 ) & npx wrangler pages deployment tail --project-name ssnip01  )
 
-npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
+
+
+npx wrangler pages deploy  --commit-dirty=true &&  npx wrangler pages deployment tail --project-name ssnip01
 
 
 
