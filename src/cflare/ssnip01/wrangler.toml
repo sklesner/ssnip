@@ -12,7 +12,7 @@ compatibility_date = "2024-07-25"
 r2_buckets  = [
   { binding = "STORY_BUCKET", bucket_name = "ssdata"},
   { binding = "TWINE_BUCKET", bucket_name = "ssdata"},
-  { binding = "QUIZ_BUCKET", bucket_name = "ssdata"}
+  { binding = "QUIZ_BUCKET", bucket_name = "ssdata"},
   { binding = "CACHE_BUCKET", bucket_name = "sscache"}
 ]
 
