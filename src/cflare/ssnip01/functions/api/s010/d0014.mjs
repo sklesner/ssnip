@@ -26,11 +26,11 @@ async function tryParseJSON(jsonString) {
   }
 }
 
-async function getCalSpec(ctx, prompt, image_data, maxRetries = 1) {
+async function getCalSpec(ctx, prompt, media_type, image_data, maxRetries = 1) {
   let attempt = 0;
   while (attempt <= maxRetries) {
     try {
-      const response = await ctx.smart_llm.sendRequest(ctx, prompt, image_data);
+      const response = await ctx.smart_llm.sendRequest(ctx, prompt, media_type, image_data);
       const parsedResponse = await tryParseJSON(response);
       
       if (parsedResponse) {
@@ -99,7 +99,7 @@ export async function onRequest(context) {
   }
 
   // Validate required parameters
-  const requiredParams = ['event_prefix', 'start_date', 'media_type', 'image_data'];
+  const requiredParams = ['start_date', 'media_type', 'image_data'];
   const missingParams = requiredParams.filter(param => !(param in params));
   
   if (missingParams.length > 0) {
@@ -116,7 +116,6 @@ export async function onRequest(context) {
 
   // Extract parameters
   const { 
-    event_prefix,
     start_date,
     media_type,
     image_data 
@@ -125,14 +124,13 @@ export async function onRequest(context) {
   const prompt = PROMPT.make_calendar_prompt(start_date);
   
   // "received_params": {
-  //   event_prefix,
   //   start_date,
   //   media_type,
   //   image_data: image_data.substring(0, 10) + '...' // Truncate for logging
   // }
 
   try {
-    const CalSpec = await getCalSpec(ctx, prompt, image_data);
+    const CalSpec = await getCalSpec(ctx, prompt, media_type, image_data);
     
     return new Response(
       JSON.stringify(CalSpec),

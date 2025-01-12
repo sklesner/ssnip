@@ -1,4 +1,4 @@
-export async function sendRequest(ctx, prompt, image_data) {
+export async function sendRequest(ctx, prompt, media_type, image_data) {
     const apiKey = ctx.env.CLAUDE_API_KEY;
 
     const escapeJsonString = (str) => {
@@ -30,7 +30,7 @@ export async function sendRequest(ctx, prompt, image_data) {
                         type: "image",
                         source: {
                             type: "base64",
-                            media_type: "image/jpeg",
+                            media_type: media_type,
                             data: image_data
                         }
                     },
