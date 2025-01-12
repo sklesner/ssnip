@@ -135,6 +135,7 @@
             }
 
             .export-button {
+                
                 background: var(--success);
             }
 
@@ -169,10 +170,19 @@
             gap: 2rem;
         }
 
-        h1, h2 {
+        h1 {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            /* margin-bottom: 1rem; */
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -613,7 +623,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            margin-bottom: 1.5rem;
         }
 
         input[type="date"] {
@@ -697,6 +706,7 @@
         }
 
         .button-primary {
+            width: 100%;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
         }
@@ -764,9 +774,11 @@
             width: 100%;
             max-width: 600px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0 auto;
+            padding-bottom: 1.5em;
         }
 
         #fileInput {
@@ -843,13 +855,18 @@
             size: 24px;
             margin-right: 1em;
         }
+
+        #aiResponse {
+            margin-top: 1rem;
+            padding: 1rem;
+        }
     </style>
 </head>
 <body>
     <div id="heading">
         <p id="title">SnipDue</p>
         <!-- <p class="title_subtitle">Turning snapshots into calendar due dates</p> -->
-        <p class="title_subtitle">Snip your schedule, paste it in, and sync — your class deadlines are added to your calendar!  </p>
+        <p class="title_subtitle">Snip your schedule, paste it in, and export deadlines to a calendar of your choice!</p>
     </div>
     
     <div class="container">
@@ -866,7 +883,7 @@
             </div>
         </div>
         <div class="list-container">
-            <h2>Events</h2>
+            <h1>Events</h1>
             
             <button class="import-button" onclick="showImportDialog()">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -894,7 +911,7 @@
                 </button>
                 <button class="google-calendar-button" onclick="exportToGoogleCalendar()">
                     <i data-lucide="calendar" class="button-icon"></i>
-                    <span>Export Events to Google Calendar</span>
+                    <span>Export to Google Calendar</span>
                 </button>
             </div>
         </div>
@@ -940,10 +957,11 @@
             
             <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
             
-            <button id="submitBtn" class="button button-primary" >SUBMIT</button>
+            <button id="submitBtn" class="button button-primary">SUBMIT</button>
             
-            <p id="Aithoughts">hold for Ai thoughts and caution</p>
-            <p id="Aicaution">hold for Ai thoughts and caution</p>
+            <div id="aiResponse">
+                <p id="Aithoughts"></p>
+            </div>
         </div>
     </div>
 
@@ -1265,7 +1283,7 @@
                     `DTSTART:${formattedDate}`,
                     `DTEND:${formattedDate}`,
                     `DTSTAMP:${formattedDate}`,
-                    `UID:${slug}@claude.ai`,
+                    `UID:${slug}@SnipDue`,
                     'END:VEVENT\n'
                 ]);
             });
@@ -1376,6 +1394,29 @@
             ];
 
             // Convert each event to ICS format
+            // events.forEach(event => {
+            //     // Format date to end at 23:59:00
+            //     const eventDate = new Date(event.date);
+            //     const formattedDate = eventDate.toISOString().slice(0, 10).replace(/-/g, '') + 'T235900';
+                
+            //     // Create slug from event name for UID
+            //     const slug = event.name.toLowerCase()
+            //         .replace(/[^a-z0-9]+/g, '-')
+            //         .replace(/(^-|-$)/g, '');
+                
+            //     // Add event to ICS content
+            //     icsContent = icsContent.concat([
+            //         'BEGIN:VEVENT',
+            //         `SUMMARY:${event.name}`,
+            //         `DTSTART;VALUE=DATE:${formattedDate.slice(0, 8)}`,
+            //         `DTEND;VALUE=DATE:${formattedDate.slice(0, 8)}`,
+            //         `DTSTAMP:${formattedDate}`,
+            //         `UID:${slug}@claude.ai`,
+            //         'END:VEVENT\n'
+            //     ]);
+            // });
+
+            // Convert each event to ICS format
             events.forEach(event => {
                 // Format date to end at 23:59:00
                 const eventDate = new Date(event.date);
@@ -1390,13 +1431,14 @@
                 icsContent = icsContent.concat([
                     'BEGIN:VEVENT',
                     `SUMMARY:${event.name}`,
-                    `DTSTART;VALUE=DATE:${formattedDate.slice(0, 8)}`,
-                    `DTEND;VALUE=DATE:${formattedDate.slice(0, 8)}`,
+                    `DTSTART:${formattedDate}`,
+                    `DTEND:${formattedDate}`,
                     `DTSTAMP:${formattedDate}`,
-                    `UID:${slug}@claude.ai`,
+                    `UID:${slug}@SnipDue`,
                     'END:VEVENT\n'
                 ]);
             });
+
 
             // Add calendar end
             icsContent.push('END:VCALENDAR');
@@ -1423,7 +1465,7 @@
             pasteArea.style.display = 'flex';
             eventPrefixInput.value = '';
             errorMessage.style.display = 'none';
-            submitBtn.disabled = true;
+            // submitBtn.disabled = true;
         }
 
         // Add all the JavaScript from image-paste-demo-styled.html
@@ -1434,6 +1476,8 @@
         const startDateInput = document.getElementById('startDate');
         const fileInput = document.getElementById('fileInput');
         const errorMessage = document.getElementById('errorMessage');
+
+        const aiThoughtsMessage = document.getElementById('Aithoughts');
 
         const MAX_FILE_SIZE = 5 * 1024 * 1024;
         const MAX_IMAGE_WIDTH = 4096;
@@ -1594,7 +1638,7 @@
         });
 
         function updateSubmitButton() {
-            submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim() || !startDateInput.value;  
+            // submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim() || !startDateInput.value;  
         }
 
         eventPrefixInput.addEventListener('input', updateSubmitButton);
@@ -1602,6 +1646,8 @@
 
 
         submitBtn.addEventListener('click', async function() {
+            aiThoughtsMessage.innerHTML = 'Loading...';
+
             if (!pastedImage) {
                 showError('Please upload an image first');
                 return;
@@ -1657,6 +1703,7 @@
                     // let events = []; // somewhere earlier in your code
                     // events = [...events, ...newEvents];
                     
+                    aiThoughtsMessage.innerHTML = response.thoughts + " " + response.caution;
                     console.log('Server thoughts:', response.thoughts);
                     console.log('Server caution:', response.caution);
                     
