@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Paste Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .input-container {
+            margin-bottom: 20px;
+        }
+        #pasteArea {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #ccc;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        #pasteArea:hover {
+            border-color: #999;
+        }
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            display: none;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+        #removeImage {
+            display: none;
+        }
+        .image-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #fileInput {
+            display: none;
+        }
+
+        .error-message {
+            color: #dc2626;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Paste Demo</h1>
+    
+    <div class="input-container">
+        <label for="eventPrefix">Event Prefix:</label>
+        <input type="text" id="eventPrefix" placeholder="Enter event prefix">
+    </div>
+
+    <div class="image-controls">
+        <button id="removeImage">Remove Image</button>
+    </div>
+
+    <div id="pasteArea">
+        <p>Click to upload or paste image here</p>
+        <p style="font-size: 0.8em;">(Use Ctrl+V/Command+V to paste, or click to choose a file)</p>
+        <p style="font-size: 0.8em;">Supported formats: JPG, PNG, GIF, WebP (Max 5MB)</p>
+    </div>
+    <div id="errorMessage" class="error-message"></div>
+    <img id="preview" alt="Preview">
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/gif,image/webp">
+    
+    <button id="submitBtn" disabled>Submit</button>
+
+    <div id="result">
+        <h2>Result:</h2>
+        <p>Event Prefix: <span id="resultPrefix"></span></p>
+        <img id="resultImage" alt="Result Image">
+    </div>
+
+    <script>
+        const pasteArea = document.getElementById('pasteArea');
+        const preview = document.getElementById('preview');
+        const submitBtn = document.getElementById('submitBtn');
+        const result = document.getElementById('result');
+        const resultPrefix = document.getElementById('resultPrefix');
+        const resultImage = document.getElementById('resultImage');
+        const eventPrefixInput = document.getElementById('eventPrefix');
+        const removeImageBtn = document.getElementById('removeImage');
+        const fileInput = document.getElementById('fileInput');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Image validation constants
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+        const MAX_IMAGE_WIDTH = 4096; // Maximum width in pixels
+        const MAX_IMAGE_HEIGHT = 4096; // Maximum height in pixels
+        const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+        let pastedImage = null;
+
+        // Function to show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000); // Hide error after 5 seconds
+        }
+
+        // Function to validate image file
+        async function validateImage(file) {
+            // Check file size
+            if (file.size > MAX_FILE_SIZE) {
+                throw new Error(`File size exceeds 5MB limit. Current size: ${(file.size / (1024 * 1024)).toFixed(2)}MB`);
+            }
+
+            // Check file type
+            if (!ALLOWED_TYPES.includes(file.type)) {
+                throw new Error('Unsupported file type. Please use JPG, PNG, GIF, or WebP');
+            }
+
+            // Check image dimensions
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+
+                img.onload = () => {
+                    URL.revokeObjectURL(img.src);
+                    if (img.width > MAX_IMAGE_WIDTH || img.height > MAX_IMAGE_HEIGHT) {
+                        reject(new Error(`Image dimensions exceed maximum limit of ${MAX_IMAGE_WIDTH}x${MAX_IMAGE_HEIGHT} pixels`));
+                    }
+                    resolve(true);
+                };
+
+                img.onerror = () => {
+                    URL.revokeObjectURL(img.src);
+                    reject(new Error('Failed to load image'));
+                };
+            });
+        }
+
+        // Handle paste events
+        document.addEventListener('paste', async function(e) {
+            const items = e.clipboardData.items;
+            
+            for (let item of items) {
+                if (item.type.indexOf('image') !== -1) {
+                    const file = item.getAsFile();
+                    try {
+                        await validateImage(file);
+                        handleImageFile(file);
+                    } catch (error) {
+                        showError(error.message);
+                    }
+                    break;
+                }
+            }
+        });
+
+        // Handle file upload
+        fileInput.addEventListener('change', async function(e) {
+            if (e.target.files && e.target.files[0]) {
+                try {
+                    await validateImage(e.target.files[0]);
+                    handleImageFile(e.target.files[0]);
+                } catch (error) {
+                    showError(error.message);
+                    fileInput.value = ''; // Clear the input
+                }
+            }
+        });
+
+        // Function to handle image file (both paste and upload)
+        function handleImageFile(file) {
+            pastedImage = file;
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                removeImageBtn.style.display = 'inline-block';
+                pasteArea.style.display = 'none';
+                updateSubmitButton();
+            };
+            
+            reader.readAsDataURL(pastedImage);
+        }
+
+        // Previous event listeners and functions remain the same
+        removeImageBtn.addEventListener('click', function() {
+            pastedImage = null;
+            preview.style.display = 'none';
+            removeImageBtn.style.display = 'none';
+            pasteArea.style.display = 'flex';
+            updateSubmitButton();
+        });
+
+        pasteArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        function updateSubmitButton() {
+            submitBtn.disabled = !pastedImage || !eventPrefixInput.value.trim();
+        }
+
+        eventPrefixInput.addEventListener('input', updateSubmitButton);
+
+        submitBtn.addEventListener('click', function() {
+            resultPrefix.textContent = eventPrefixInput.value;
+            resultImage.src = preview.src;
+            result.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
