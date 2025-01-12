@@ -16,7 +16,8 @@ export async function sendRequest(ctx, prompt, image_data) {
         {
         // model: "claude-3-haiku-20240307",
         // max_tokens: 2048,
-        model: "claude-3-5-sonnet-20240620",
+        // model: "claude-3-5-sonnet-20240620",
+        model: "claude-3-5-sonnet-20241022",
         // max_tokens: 4096,
         max_tokens: 8192,
         // temperature: 1,
@@ -44,7 +45,7 @@ export async function sendRequest(ctx, prompt, image_data) {
 
 );
 
-    console.log("claude body: " + body);
+    // console.log("claude body: " + body);
 
     try {
         const claudeResponse = await fetch("https://api.anthropic.com/v1/messages", {
@@ -65,7 +66,7 @@ export async function sendRequest(ctx, prompt, image_data) {
         const responseData = await claudeResponse.json();
 
         const rtext = await responseData.content[0].text;
-        console.log("claude rtext: " + rtext);
+        // console.log("claude rtext: " + rtext);
         return rtext;
     } catch (error) {
         console.error("Error in requestClaude:", error);
