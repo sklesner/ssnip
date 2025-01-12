@@ -1,4 +1,4 @@
-export async function sendRequest(ctx, prompt) {
+export async function sendRequest(ctx, prompt, image_data) {
     const apiKey = ctx.env.CLAUDE_API_KEY;
 
     const escapeJsonString = (str) => {
@@ -19,12 +19,25 @@ export async function sendRequest(ctx, prompt) {
         model: "claude-3-5-sonnet-20240620",
         // max_tokens: 4096,
         max_tokens: 8192,
-        temperature: 1,
+        // temperature: 1,
         // system: "You are Roald Dahl known for creating incredible worlds and showing young readers the power of language.",
         messages: [
             {
                 role: "user",
-                content: escapedPrompt
+                content: [
+                    {
+                        type: "image",
+                        source: {
+                            type: "base64",
+                            media_type: "image/jpeg",
+                            data: image_data
+                        }
+                    },
+                    {
+                        type: "text",
+                        text: escapedPrompt
+                    }
+                ]
             }
         ]
     }
