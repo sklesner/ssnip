@@ -153,92 +153,92 @@ export async function onRequest(context) {
         {
           "date": "2025-01-15",
           "day": "Wednesday",
-          "title": "CS256: Assignment 1"
+          "name": "CS256: Assignment 1"
         },
         {
           "date": "2025-01-16",
           "day": "Thursday", 
-          "title": "CS256: Quiz 1"
+          "name": "CS256: Quiz 1"
         },
         {
           "date": "2025-01-22",
           "day": "Wednesday",
-          "title": "CS256: Assignment 2"
+          "name": "CS256: Assignment 2"
         },
         {
           "date": "2025-01-23",
           "day": "Thursday",
-          "title": "CS256: Quiz 2"
+          "name": "CS256: Quiz 2"
         },
         {
           "date": "2025-01-29",
           "day": "Wednesday",
-          "title": "CS256: Assignment 3"
+          "name": "CS256: Assignment 3"
         },
         {
           "date": "2025-01-30",
           "day": "Thursday",
-          "title": "CS256: Quiz 3"
+          "name": "CS256: Quiz 3"
         },
         {
           "date": "2025-02-05",
           "day": "Wednesday",
-          "title": "CS256: Assignment 4"
+          "name": "CS256: Assignment 4"
         },
         {
           "date": "2025-02-06",
           "day": "Thursday",
-          "title": "CS256: Quiz 4"
+          "name": "CS256: Quiz 4"
         },
         {
           "date": "2025-02-12",
           "day": "Wednesday",
-          "title": "CS256: Assignment 5"
+          "name": "CS256: Assignment 5"
         },
         {
           "date": "2025-02-13",
           "day": "Thursday",
-          "title": "CS256: Quiz 5"
+          "name": "CS256: Quiz 5"
         },
         {
           "date": "2025-02-19",
           "day": "Wednesday",
-          "title": "CS256: Assignment 6"
+          "name": "CS256: Assignment 6"
         },
         {
           "date": "2025-02-20",
           "day": "Thursday",
-          "title": "CS256: Quiz 6"
+          "name": "CS256: Quiz 6"
         },
         {
           "date": "2025-02-26",
           "day": "Wednesday",
-          "title": "CS256: Assignment 7"
+          "name": "CS256: Assignment 7"
         },
         {
           "date": "2025-02-27",
           "day": "Thursday",
-          "title": "CS256: Quiz 7"
+          "name": "CS256: Quiz 7"
         },
         {
           "date": "2025-03-05",
           "day": "Wednesday",
-          "title": "CS256: Assignment 8"
+          "name": "CS256: Assignment 8"
         },
         {
           "date": "2025-03-06",
           "day": "Thursday",
-          "title": "CS256: Quiz 8"
+          "name": "CS256: Quiz 8"
         },
         {
           "date": "2025-03-12",
           "day": "Wednesday",
-          "title": "CS256: Assignment 9"
+          "name": "CS256: Assignment 9"
         },
         {
           "date": "2025-03-13",
           "day": "Thursday",
-          "title": "CS256: Quiz 9"
+          "name": "CS256: Quiz 9"
         }
       ]
     }),
