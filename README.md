@@ -1,6 +1,6 @@
 # SnipDue
 
-# [TRY IT HERE](https://snipdue.tech)
+# >>> [TRY IT HERE](https://snipdue.tech) <<<
 
 #### **Our Inspiration**  
 
