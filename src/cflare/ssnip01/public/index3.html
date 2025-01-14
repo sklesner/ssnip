@@ -6,9 +6,35 @@
     <title>SnipDue - Effortless Academic Deadline Management</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script> -->
     <link rel="icon" href="favicon.png" type="image/x-icon">
 </head>
 <body class="bg-gray-50">
+
+
+    <!-- Navigation
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-blue-600">SnipDue</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600">Features</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-blue-600">How It Works</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-blue-600">Pricing</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                </div>
+                <div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        Try Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav> -->
 
     <!-- Navigation -->
     <nav class="bg-white shadow-lg fixed w-full z-50">
@@ -34,23 +60,25 @@
         </div>
     </nav>
 
+
+    <!-- Hero Section -->
     <section class="pt-24 pb-12 bg-gradient-to-r from-blue-500 to-blue-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-                    Never Miss Another Assignment Deadline
+                    Your Academic Deadlines, Simplified
                 </h1>
                 <p class="mt-3 max-w-md mx-auto text-base text-gray-100 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
                     Snip a picture of your class schedule, and we'll add all your due dates to your favorite calendar. It's that easy.
                 </p>
-                <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-                    <div class="rounded-md shadow mb-3 sm:mb-0 sm:mr-4">
+                <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8 space-x-4">
+                    <div class="rounded-md shadow">
                         <a target="_blank" href="https://www.youtube.com/embed/SXRZ5oiWmYE?autoplay=1&fs=1" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                            SEE DEMO
+                            DEMO VIDEO
                         </a>                        
                     </div>
-                    <div class="rounded-md shadow">
-                        <a target="_blank" href="calendar.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                    <div class="rounded-md shadow mt-3 sm:mt-0">
+                        <a href="calendar.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
                             TRY DEMO
                         </a>
                     </div>
@@ -126,12 +154,20 @@
                 What Students Say
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 mb-4">"SnipDue saves me from tedious calendar due date entry. I just snip my class schedules at the start of the semester, and all my deadlines are instantly organized. Game changer!"</p>
+                    <p class="font-semibold">- Alex M., Computer Science Major</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 mb-4">"As a double major, keeping track of assignments was overwhelming. SnipDue helps me stay on top of everything without the stress of manual organization."</p>
+                    <p class="font-semibold">- Sarah K., Business & Psychology Student</p>
+                </div> -->
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <p class="text-gray-600 mb-4">"I was skeptical at first, but it actually works pretty well. The calendar sync feature saved me a lot of time compared to typing everything manually."</p>
                     <p class="font-semibold">- James L., Engineering Student</p>
                 </div>
                 <div class="bg-gray-50 p-6 rounded-lg">
-                    <p class="text-gray-600 mb-4">"Nice not to have type in my deadlines. The interface is simple, and I appreciate that it flags any dates it's unsure about so I can double-check them."</p>
+                    <p class="text-gray-600 mb-4">"Nice not have type in my deadlines. The interface is simple, and I appreciate that it flags any dates it's unsure about so I can double-check them."</p>
                     <p class="font-semibold">- Maya R., Biology Major</p>
                 </div>
                 <div class="bg-gray-50 p-6 rounded-lg">
@@ -145,6 +181,77 @@
             </div>
         </div>
     </section>
+
+    <!-- Testimonials
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                What Students Say
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 mb-4">"SnipDue saves me from tedious calendar entry. I just snip my class schedules at the start of the semester, and all my deadlines are instantly organized. Game changer!"</p>
+                    <p class="font-semibold">- Alex M., Computer Science Major</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <p class="text-gray-600 mb-4">"As a double major, keeping track of assignments was overwhelming. SnipDue helps me stay on top of everything without the stress of manual organization."</p>
+                    <p class="font-semibold">- Sarah K., Business & Psychology Student</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Pricing -->
+    <!-- <section id="pricing" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                Simple Pricing for Students
+            </h2>
+            <div class="max-w-lg mx-auto">
+                <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-blue-600">
+                    <h3 class="text-xl font-semibold mb-2">Student Plan</h3>
+                    <p class="text-3xl font-bold mb-4">Free<span class="text-gray-500 text-base"> during beta</span></p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center"><i data-lucide="check" class="text-green-500 mr-2"></i>Unlimited schedule snips</li>
+                        <li class="flex items-center"><i data-lucide="check" class="text-green-500 mr-2"></i>All calendar integrations</li>
+                        <li class="flex items-center"><i data-lucide="check" class="text-green-500 mr-2"></i>AI-powered due date extraction</li>
+                        <li class="flex items-center"><i data-lucide="check" class="text-green-500 mr-2"></i>Error detection</li>
+                    </ul>
+                    <a href="calendar.html" class="block w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-center">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact -->
+    <!-- <section id="contact" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">
+                Get in Touch
+            </h2>
+            <div class="max-w-lg mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section> -->
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
