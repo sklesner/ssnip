@@ -1,6 +1,6 @@
 # SnipDue
 
-# [PRODUCTION APP](https://snipdue.tech)
+# [TRY IT HERE](https://snipdue.tech)
 
 #### **Our Inspiration**  
 
