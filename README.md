@@ -1,7 +1,6 @@
 # SnipDue
 
-# [TRY IT OUT HERE](https://snipdue.tech/calendar)
-# [Landing Page](https://snipdue.tech)
+# [PRODUCTION APP](https://snipdue.tech)
 
 #### **Our Inspiration**  
 
